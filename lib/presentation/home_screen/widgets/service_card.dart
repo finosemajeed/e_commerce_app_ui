@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 class ServiceCard extends StatelessWidget {
   const ServiceCard({
     Key? key,
-    this.text,
+    required this.text,
     required this.icon,
   }) : super(key: key);
 
-  final text;
+  final String text;
   final IconData icon;
 
   @override

@@ -6,26 +6,27 @@ class SeeMoreActionButton extends StatelessWidget {
     Key? key,
     required this.text,
   }) : super(key: key);
-  final text;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             text,
             style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+                color: Color.fromARGB(177, 0, 0, 0)),
           ),
           TextButton(
               onPressed: () {},
               child: const Text(
                 'See more',
-                style: TextStyle(color: offBlack),
+                style: TextStyle(color: offBlack, fontSize: 18),
               ))
         ],
       ),

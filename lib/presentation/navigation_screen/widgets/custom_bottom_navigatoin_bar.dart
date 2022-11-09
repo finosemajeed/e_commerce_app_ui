@@ -6,17 +6,18 @@ class CustomBottomNavigatonBar extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(30.0),
-        topRight: Radius.circular(30.0),
+        topLeft: Radius.circular(20.0), // adjust to your liking
+        topRight: Radius.circular(20.0), // adjust to your liking
       ),
       child: BottomNavigationBar(
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
-        currentIndex: 1,
+        currentIndex: 0,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedItemColor: orange,

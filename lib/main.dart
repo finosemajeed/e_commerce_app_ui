@@ -1,4 +1,5 @@
 import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
+import 'package:e_comerce_app_ui/presentation/splash_screen/spalash_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: NavigationScreen(),
+      home: SplashScreen(),
     );
   }
 }
