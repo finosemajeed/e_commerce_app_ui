@@ -1,0 +1,1 @@
+const search = 'Search product';
