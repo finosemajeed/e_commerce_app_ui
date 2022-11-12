@@ -1,10 +1,7 @@
 import 'dart:async';
 
 import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(
-        Duration(seconds: 4),
+        const Duration(seconds: 4),
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(

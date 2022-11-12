@@ -1,4 +1,4 @@
-import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
+import 'package:e_comerce_app_ui/presentation/search_screen/search_screen.dart';
 import 'package:e_comerce_app_ui/presentation/splash_screen/spalash_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -12,9 +12,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
+      routes: {
+        '/searchScreen': (context) => SearchScreen(),
+      },
     );
   }
 }
