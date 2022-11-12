@@ -1,53 +1,9 @@
+
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 240,
-      child: ListView(
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        children: const [
-          _ItemCard(
-            image: 'assets/products/tshirt.png',
-            title: 'Tshirt',
-            price: '299',
-          ),
-          _ItemCard(
-            image: 'assets/products/console.png',
-            title: 'console',
-            price: '899',
-          ),
-          _ItemCard(
-            image: 'assets/products/pants.png',
-            title: 'Pants',
-            price: '689',
-          ),
-          _ItemCard(
-            image: 'assets/products/women_bag.png',
-            title: 'Women Bag',
-            price: '1499',
-          ),
-          _ItemCard(
-            image: 'assets/products/women_dress.png',
-            title: 'Women Dress',
-            price: '800',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ItemCard extends StatelessWidget {
-  const _ItemCard({
     Key? key,
     required this.image,
     required this.title,

@@ -1,7 +1,7 @@
 import 'package:e_comerce_app_ui/presentation/home_screen/home_screen.dart';
-import 'package:e_comerce_app_ui/presentation/navigation_screen/widgets/appbar_icon.dart';
+import 'package:e_comerce_app_ui/presentation/widgets/appbar_icon.dart';
 import 'package:e_comerce_app_ui/presentation/navigation_screen/widgets/custom_bottom_navigatoin_bar.dart';
-import 'package:e_comerce_app_ui/presentation/navigation_screen/widgets/search_field.dart';
+import 'package:e_comerce_app_ui/presentation/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class NavigationScreen extends StatelessWidget {
