@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 50),
       child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(), 
         shrinkWrap: true,
         slivers: [
           SliverList(
