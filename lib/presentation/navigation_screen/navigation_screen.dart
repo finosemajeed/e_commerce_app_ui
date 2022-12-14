@@ -1,11 +1,21 @@
+import 'package:e_comerce_app_ui/presentation/favourite_screen/favourite_screen.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/home_screen.dart';
+import 'package:e_comerce_app_ui/presentation/notificaation_screen/notifcation_screen.dart';
+import 'package:e_comerce_app_ui/presentation/profile_screen/profile_screen.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/appbar_icon.dart';
 import 'package:e_comerce_app_ui/presentation/navigation_screen/widgets/custom_bottom_navigatoin_bar.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class NavigationScreen extends StatelessWidget {
-  const NavigationScreen({super.key});
+  NavigationScreen({super.key});
+
+  final _pages = [
+    HomeScreen(),
+    FavouriteScreen(),
+    NotificationScreen(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +32,10 @@ class NavigationScreen extends StatelessWidget {
           SizedBox(width: 10),
         ],
       ),
-      body: const HomeScreen(),
+      body: ValueListenableBuilder(
+        builder: ((context, value, _) => _pages[value]),
+        valueListenable: indexChangeNotifier,
+      ),
       bottomNavigationBar: const CustomBottomNavigatonBar(),
     );
   }

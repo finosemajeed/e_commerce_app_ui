@@ -1,4 +1,3 @@
-
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +15,9 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, top: 8, bottom: 8),
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
       child: Card(
-        elevation: 0,
+        elevation: 1,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,12 +26,14 @@ class ProductCard extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                   color: offWhite, borderRadius: BorderRadius.circular(20)),
-              width: 150,
-              height: 160,
+              height: 180,
               child: Center(
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.cover,
+                child: SizedBox(
+                  width: 180,
+                  child: Image.asset(
+                    image,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
