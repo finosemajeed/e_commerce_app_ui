@@ -21,17 +21,6 @@ class NavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const SearchField(),
-        actions: const [
-          AppbarIcon(icon: Icons.card_travel),
-          SizedBox(width: 10),
-          AppbarIcon(icon: Icons.notifications),
-          SizedBox(width: 10),
-        ],
-      ),
       body: ValueListenableBuilder(
         builder: ((context, value, _) => _pages[value]),
         valueListenable: indexChangeNotifier,
