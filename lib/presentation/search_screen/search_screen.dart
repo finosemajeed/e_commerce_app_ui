@@ -17,8 +17,11 @@ class SearchScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const SearchField(),
-        actions: const [
-          AppbarIcon(icon: Icons.sort),
+        actions: [
+          AppbarIcon(
+            icon: Icons.sort,
+            press: () {},
+          ),
           SizedBox(width: 10),
         ],
       ),

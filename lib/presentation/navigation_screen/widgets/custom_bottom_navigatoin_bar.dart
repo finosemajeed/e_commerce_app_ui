@@ -32,19 +32,19 @@ class CustomBottomNavigatonBar extends StatelessWidget {
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home_outlined),
-                  label: "home",
+                  label: "Home",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite_outline),
-                  label: "home",
+                  icon: Icon(Icons.local_grocery_store_outlined),
+                  label: "My Cart",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.message_outlined),
-                  label: "home",
+                  icon: Icon(Icons.widgets),
+                  label: "more",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.perm_identity_outlined),
-                  label: "home",
+                  label: "Account",
                 ),
               ],
             );
