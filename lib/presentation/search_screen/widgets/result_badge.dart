@@ -44,7 +44,7 @@ class ResultBadge extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 '$results Results',
-                style: TextStyle(color: offBlack, fontSize: 18),
+                style: const TextStyle(color: offBlack, fontSize: 18),
               ))
         ],
       ),

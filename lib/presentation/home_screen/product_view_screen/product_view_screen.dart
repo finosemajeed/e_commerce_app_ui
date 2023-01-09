@@ -23,7 +23,7 @@ class ScreenCardView extends StatelessWidget {
       body: CustomScrollView(
         primary: true,
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
           ProductImageView(productId: productId),
           SliverList(

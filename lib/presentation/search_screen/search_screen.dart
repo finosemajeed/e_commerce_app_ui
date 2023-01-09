@@ -1,5 +1,3 @@
-import 'package:e_comerce_app_ui/presentation/home_screen/widgets/product_card_list.dart';
-import 'package:e_comerce_app_ui/presentation/home_screen/widgets/see_more_action_button.dart';
 import 'package:e_comerce_app_ui/presentation/search_screen/widgets/result_badge.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/appbar_icon.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/product_card.dart';
@@ -22,7 +20,7 @@ class SearchScreen extends StatelessWidget {
             icon: Icons.sort,
             press: () {},
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
         ],
       ),
       body: CustomScrollView(
@@ -39,7 +37,7 @@ class SearchScreen extends StatelessWidget {
                 ),
                 GridView.builder(
                   shrinkWrap: true,
-                  physics: PageScrollPhysics(),
+                  physics: const PageScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: (MediaQuery.of(context).size.width) /
                         (MediaQuery.of(context).size.height / 1.4),

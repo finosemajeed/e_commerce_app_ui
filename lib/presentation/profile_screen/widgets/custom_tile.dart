@@ -16,7 +16,7 @@ class CustomTile extends StatelessWidget {
       enableFeedback: true,
       title: Text(title),
       leading: Icon(icon),
-      trailing: Icon(Icons.keyboard_arrow_right_outlined),
+      trailing: const Icon(Icons.keyboard_arrow_right_outlined),
     );
   }
 }

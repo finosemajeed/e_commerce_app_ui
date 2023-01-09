@@ -1,14 +1,10 @@
-import 'dart:developer';
-
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:e_comerce_app_ui/presentation/cart_screen/cart_screen.dart';
-import 'package:e_comerce_app_ui/presentation/favourite_screen/favourite_screen.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/custom_offer_card.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/custom_service_card_area.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/product_card_list.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/see_more_action_button.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/special_item_card.dart';
-import 'package:e_comerce_app_ui/presentation/profile_screen/profile_screen.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/appbar_icon.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/search_field.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +27,7 @@ class HomeScreen extends StatelessWidget {
             child: IconButton(
                 onPressed: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => CartScreen())));
+                      MaterialPageRoute(builder: ((context) => const CartScreen())));
                 },
                 icon: const Icon(
                   Icons.local_grocery_store_outlined,

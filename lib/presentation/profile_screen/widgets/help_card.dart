@@ -21,7 +21,7 @@ class HelpCard extends StatelessWidget {
         child: Center(
             child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Icon(
               Icons.headset_mic_outlined,
               color: orange,

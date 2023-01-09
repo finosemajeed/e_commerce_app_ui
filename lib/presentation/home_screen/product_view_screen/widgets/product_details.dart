@@ -35,8 +35,8 @@ class ProductDetails {
                     ),
                   ),
                   Text(
-                    "${val}",
-                    style: TextStyle(fontSize: 35),
+                    "$val",
+                    style: const TextStyle(fontSize: 35),
                   ),
                   IconButton(
                     onPressed: () {

@@ -10,12 +10,12 @@ class FavouriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: offBlack),
+          iconTheme: const IconThemeData(color: offBlack),
           elevation: 0,
           backgroundColor: Colors.transparent,
-          actions: [
+          actions: const [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Icon(
                 Icons.favorite,
                 color: Colors.red,
@@ -28,8 +28,8 @@ class FavouriteScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'My favourite',
                 style: TextStyle(
@@ -41,7 +41,7 @@ class FavouriteScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemCount: 4,
                 itemBuilder: ((context, index) {
                   return CustomFavouriteCard(

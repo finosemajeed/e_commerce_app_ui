@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:e_comerce_app_ui/db/data_model.dart';
+import 'package:e_comerce_app_ui/presentation/cart_screen/widgets/check_out_card.dart';
 import 'package:e_comerce_app_ui/presentation/cart_screen/widgets/custom_cart_item.dart';
 import 'package:flutter/material.dart';
 
@@ -13,15 +14,14 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: offBlack),
+        iconTheme: const IconThemeData(color: offBlack),
         actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
             child: Badge(
-              badgeContent: Text('3'),
-              child: Icon(
+              badgeContent: Text(productDetails.length.toString()),
+              child: const Icon(
                 Icons.local_grocery_store_outlined,
-                semanticLabel: '22',
               ),
             ),
           )
@@ -44,7 +44,7 @@ class CartScreen extends StatelessWidget {
           Expanded(
             child: ListView.builder(
                 shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemCount: 4,
                 itemBuilder: ((context, index) {
                   return CustomCartItem(
@@ -54,112 +54,10 @@ class CartScreen extends StatelessWidget {
                   );
                 })),
           ),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: orange.withOpacity(0.8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  dense: true,
-                  title: Text(
-                    'Subtotal',
-                    style: TextStyle(
-                      color: offWhite.withOpacity(0.6),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                  trailing: Text(
-                    '2323',
-                    style: TextStyle(
-                      color: offWhite,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  dense: true,
-                  title: Text(
-                    'Tax & Fees',
-                    style: TextStyle(
-                      color: offWhite.withOpacity(0.6),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                  trailing: Text(
-                    '33',
-                    style: TextStyle(
-                      color: offWhite,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  dense: true,
-                  title: Text(
-                    'Delivery',
-                    style: TextStyle(
-                      color: offWhite.withOpacity(0.6),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                  trailing: Text(
-                    'free',
-                    style: TextStyle(
-                      color: offWhite,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  dense: true,
-                  title: Text(
-                    'Total',
-                    style: TextStyle(
-                      color: offWhite.withOpacity(0.9),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                  trailing: Text(
-                    '2323',
-                    style: TextStyle(
-                      color: offWhite,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Checkout',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(MediaQuery.of(context).size.width, 50),
-                      backgroundColor: offWhite,
-                    ),
-                  ),
-                )
-              ],
-            ),
+          const CheckOutCard(
+            subTotal: '2322',
+            taxAndFee: '40',
+            totalPrice: '4000',
           )
         ],
       ),

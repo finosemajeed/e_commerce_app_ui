@@ -15,17 +15,17 @@ class ProfileTile extends StatelessWidget {
       leading: CircleAvatar(
         backgroundImage: AssetImage(profileImage),
       ),
-      title: Text(
+      title: const Text(
         'Welcome',
         style: TextStyle(color: Colors.black26),
       ),
       subtitle: Text(
         'Mr. $userName',
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       trailing: IconButton(
         onPressed: () {},
-        icon: Icon(Icons.logout),
+        icon: const Icon(Icons.logout),
       ),
     );
   }

@@ -28,7 +28,6 @@ class CustomCartItem extends StatelessWidget {
             Container(
               height: 150,
               width: 150,
-              color: offWhite,
               child: Image.asset(productImage),
             ),
             Column(
@@ -72,7 +71,7 @@ class CustomCartItem extends StatelessWidget {
                               ),
                               Text(
                                 "${val}",
-                                style: TextStyle(fontSize: 35),
+                                style: const TextStyle(fontSize: 35),
                               ),
                               IconButton(
                                 onPressed: () {
@@ -105,7 +104,7 @@ class CustomCartItem extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.delete,
                   size: 30,
                   color: offBlack,
