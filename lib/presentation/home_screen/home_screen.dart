@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:e_comerce_app_ui/core/color_config.dart';
+import 'package:e_comerce_app_ui/presentation/cart_screen/cart_screen.dart';
 import 'package:e_comerce_app_ui/presentation/favourite_screen/favourite_screen.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/custom_offer_card.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/custom_service_card_area.dart';
@@ -23,13 +25,18 @@ class HomeScreen extends StatelessWidget {
         toolbarHeight: 100,
         title: const SearchField(),
         actions: [
-          AppbarIcon(
-            icon: Icons.favorite_border,
-            press: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: ((context) => ProfileScreen())));
-              log("icon pressed");
-            },
+          CircleAvatar(
+            radius: 25,
+            backgroundColor: offWhite,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: ((context) => CartScreen())));
+                },
+                icon: const Icon(
+                  Icons.local_grocery_store_outlined,
+                  color: offBlack,
+                )),
           ),
           const SizedBox(width: 10),
           AppbarIcon(

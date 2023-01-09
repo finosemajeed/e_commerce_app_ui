@@ -35,8 +35,8 @@ class CustomBottomNavigatonBar extends StatelessWidget {
                   label: "Home",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.local_grocery_store_outlined),
-                  label: "My Cart",
+                  icon: Icon(Icons.favorite_border_outlined),
+                  label: "My Favourite",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.widgets),
