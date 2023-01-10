@@ -5,6 +5,7 @@ import 'package:e_comerce_app_ui/presentation/home_screen/widgets/custom_service
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/product_card_list.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/see_more_action_button.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/special_item_card.dart';
+import 'package:e_comerce_app_ui/presentation/notification_screen/notifcation_screen.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/appbar_icon.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/search_field.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +37,18 @@ class HomeScreen extends StatelessWidget {
                 )),
           ),
           const SizedBox(width: 10),
-          AppbarIcon(
-            icon: Icons.notifications,
-            press: () {},
+          CircleAvatar(
+            radius: 25,
+            backgroundColor: offWhite,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => NotificationScreen())));
+                },
+                icon: const Icon(
+                  Icons.notifications,
+                  color: offBlack,
+                )),
           ),
           const SizedBox(width: 10),
         ],

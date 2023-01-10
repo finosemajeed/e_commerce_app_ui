@@ -18,9 +18,9 @@ class CustomFavouriteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(1.0),
       child: Card(
-        elevation: 2,
+        elevation: 0,
         shadowColor: orange,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

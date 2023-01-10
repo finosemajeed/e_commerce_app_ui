@@ -127,16 +127,7 @@ class SignUpScreen extends StatelessWidget {
                           if (isValid) {
                             SignupAuthFunction.signupUser(
                                 email, password, userName, context);
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) =>
-                                        NavigationScreen())));
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Registration succesfull!'),
-                              ),
-                            );
+                            Navigator.of(context).pop();
                           }
                         },
                         child: const Text('Sign Up'),

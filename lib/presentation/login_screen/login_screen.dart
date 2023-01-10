@@ -1,3 +1,4 @@
+import 'package:e_comerce_app_ui/domain/global/global_data.dart';
 import 'package:e_comerce_app_ui/domain/login_screen/login_auth_function.dart';
 import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
 import 'package:e_comerce_app_ui/presentation/signup_screen/signup_screen.dart';
@@ -102,11 +103,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (isValid) {
                       final email = emailController.text.trim();
                       final password = passwordContoller.text.trim();
-                      // Navigator.pushReplacement(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => NavigationScreen()));
+
                       LoginAuthFunction.signInUser(email, password, context);
+                      if (isLoggedIn) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NavigationScreen()));
+                      }
                     } else {
                       Fluttertoast.showToast(msg: 'Login failed!');
                     }

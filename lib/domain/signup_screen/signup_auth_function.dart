@@ -13,7 +13,7 @@ class SignupAuthFunction {
       await FirebaseAuth.instance.currentUser!.updateEmail(email);
       SignUpFirestoreService.saveUser(name, email, userCredential.user!.uid);
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Registration Succesful')));
+          .showSnackBar(SnackBar(content: Text('Registration Succesfull')));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         ScaffoldMessenger.of(context).showSnackBar(

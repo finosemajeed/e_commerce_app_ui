@@ -1,10 +1,15 @@
+import 'package:e_comerce_app_ui/domain/login_screen/login_auth_function.dart';
+import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
 import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/custom_tile.dart';
 import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/help_card.dart';
 import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/profile_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+
+  final userCredential = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +21,10 @@ class ProfileScreen extends StatelessWidget {
       extendBody: true,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          const ProfileTile(
-            userName: 'Hattie Hall',
+          ProfileTile(
+            userName: userCredential!.displayName.toString(),
             profileImage: 'assets/images/gaming.jfif',
           ),
           const Divider(),

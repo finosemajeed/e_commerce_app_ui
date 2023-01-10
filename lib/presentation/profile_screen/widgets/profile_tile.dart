@@ -1,3 +1,5 @@
+import 'package:e_comerce_app_ui/domain/login_screen/login_auth_function.dart';
+import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTile extends StatelessWidget {
@@ -24,7 +26,12 @@ class ProfileTile extends StatelessWidget {
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       trailing: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          LoginAuthFunction.logoutUser();
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: ((context) => LoginScreen())),
+              (route) => false);
+        },
         icon: const Icon(Icons.logout),
       ),
     );
