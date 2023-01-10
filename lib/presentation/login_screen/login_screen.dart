@@ -25,12 +25,12 @@ class _LoginScreenState extends State<LoginScreen> {
             key: formkey,
             child: Column(
               children: [
-                const SizedBox(height: 150),
+                SizedBox(height: MediaQuery.of(context).size.height / 4),
                 const Text(
                   'Please login to continue,',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 40),
+                SizedBox(height: 50),
                 TextFormField(
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
@@ -45,8 +45,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   validator: (text) {
-                    if (text!.isEmpty || !(text.contains('@'))) {
-                      return "Please check your user name and password!";
+                    if (text!.isEmpty) {
+                      if (!(text.contains('@'))) {
+                        return 'Please check your username';
+                      }
+                      return "Please enter your username";
                     }
                     return null;
                   },
@@ -87,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 40),
+                SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
                     final isValid = formkey.currentState!.validate();

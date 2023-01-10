@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 100,
@@ -26,8 +27,8 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: offWhite,
             child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => const CartScreen())));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => const CartScreen())));
                 },
                 icon: const Icon(
                   Icons.local_grocery_store_outlined,

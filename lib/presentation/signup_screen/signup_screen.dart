@@ -1,34 +1,32 @@
+import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
 import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../domain/signup_screen/signup_auth_function.dart';
 
 // ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  TextEditingController pass = TextEditingController();
-  TextEditingController cpass = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordContoller = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
   var regKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white10,
-        elevation: 0,
-        foregroundColor: Colors.black,
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(height: 40),
+                SizedBox(height: MediaQuery.of(context).size.height / 4),
                 const Text(
                   'Sign up',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
                 const Text(
@@ -45,6 +43,7 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextFormField(
+                        controller: userNameController,
                         decoration: const InputDecoration(
                           hintText: 'username@example.com',
                           prefixIcon: Icon(
@@ -57,9 +56,9 @@ class SignUpScreen extends StatelessWidget {
                                 BorderRadius.all(Radius.circular(50.0)),
                           ),
                         ),
-                        validator: (userName) {
-                          if (userName!.isEmpty || !(userName.contains('@'))) {
-                            return 'Enter a valid username include \'@\'';
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please provide a username';
                           } else {
                             return null;
                           }
@@ -68,29 +67,26 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.key,
-                            color: Colors.black,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.key,
+                              color: Colors.black,
+                            ),
+                            labelText: 'Email',
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                            ),
                           ),
-                          labelText: 'Password',
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
-                          ),
-                        ),
-                        textInputAction: TextInputAction.next,
-                        controller: pass,
-                        validator: (value) {
-                          if (value!.isEmpty || value.length < 6) {
-                            return 'Password must be greater than 6';
-                          } else if (pass.toString() != pass.toString()) {
-                            return 'Password does not match';
-                          }
-                          return null;
-                        },
-                      ),
+                          textInputAction: TextInputAction.next,
+                          controller: emailController,
+                          validator: (value) {
+                            if (value!.isEmpty || !(value.contains('@'))) {
+                              return 'Enter a valid username include \'@\'';
+                            } else {
+                              return null;
+                            }
+                          }),
                       const SizedBox(height: 20),
                       TextFormField(
                         obscureText: true,
@@ -106,12 +102,10 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         textInputAction: TextInputAction.done,
-                        controller: cpass,
+                        controller: passwordContoller,
                         validator: (value) {
                           if (value!.isEmpty || value.length < 6) {
                             return 'Password must be greater than 6';
-                          } else if (pass.toString() != pass.toString()) {
-                            return 'Password does not match';
                           }
                           return null;
                         },
@@ -127,25 +121,22 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           final isValid = regKey.currentState!.validate();
+                          final email = emailController.text.trim();
+                          final password = passwordContoller.text.trim();
+                          final userName = userNameController.text.trim();
                           if (isValid) {
-                            Navigator.push(
+                            SignupAuthFunction.signupUser(
+                                email, password, userName, context);
+                            Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: ((context) =>
                                         NavigationScreen())));
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: const Text('Registration succesfull!'),
-                                action: SnackBarAction(
-                                  label: 'Action',
-                                  onPressed: () {
-                                    // Code to execute.
-                                  },
-                                ),
+                              const SnackBar(
+                                content: Text('Registration succesfull!'),
                               ),
                             );
-                          } else {
-                            Fluttertoast.showToast(msg: 'Registration failed!');
                           }
                         },
                         child: const Text('Sign Up'),
@@ -156,16 +147,15 @@ class SignUpScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Wrap(
                   children: [
                     const Text('Already have an account?',
                         style: TextStyle(color: Colors.blue)),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
+                    GestureDetector(
+                      onTap: (() => Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: ((context) => LoginScreen())))),
+                      child: Text(
                         'Login',
                         style: TextStyle(color: Colors.blue),
                       ),

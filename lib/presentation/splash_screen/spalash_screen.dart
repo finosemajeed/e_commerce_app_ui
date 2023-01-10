@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
 import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -15,9 +17,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(
-        const Duration(seconds: 4),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: ((context) => NavigationScreen()))));
+        const Duration(seconds: 2),
+        () =>
+            // StreamBuilder(
+            //       stream: FirebaseAuth.instance.authStateChanges(),
+            //       builder: (context, snapshot) {
+            //         if (snapshot.hasData) {
+            //           return LoginScreen();
+            //         } else {
+            //           return NavigationScreen();
+            //         }
+            //       },
+            //     ));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: ((context) => LoginScreen()))));
     super.initState();
   }
 
