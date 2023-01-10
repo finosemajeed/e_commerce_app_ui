@@ -1,3 +1,4 @@
+import 'package:e_comerce_app_ui/domain/login_screen/login_auth_function.dart';
 import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
 import 'package:e_comerce_app_ui/presentation/signup_screen/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordContoller = TextEditingController();
+  var formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    var formkey = GlobalKey<FormState>();
     bool viewPassword = true;
 
     return Scaffold(
@@ -32,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 50),
                 TextFormField(
+                  controller: emailController,
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     hintText: 'username@example.com',
@@ -39,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Icons.account_circle,
                       color: Colors.black,
                     ),
-                    labelText: 'Username',
+                    labelText: 'Email',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50.0)),
                     ),
@@ -47,15 +51,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   validator: (text) {
                     if (text!.isEmpty) {
                       if (!(text.contains('@'))) {
-                        return 'Please check your username';
+                        return 'Please check your Email';
                       }
-                      return "Please enter your username";
+                      return "Please enter your Email";
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  controller: passwordContoller,
                   textInputAction: TextInputAction.done,
                   obscuringCharacter: '*',
                   obscureText: viewPassword,
@@ -95,10 +100,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     final isValid = formkey.currentState!.validate();
                     if (isValid) {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NavigationScreen()));
+                      final email = emailController.text.trim();
+                      final password = passwordContoller.text.trim();
+                      // Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => NavigationScreen()));
+                      LoginAuthFunction.signInUser(email, password, context);
                     } else {
                       Fluttertoast.showToast(msg: 'Login failed!');
                     }
