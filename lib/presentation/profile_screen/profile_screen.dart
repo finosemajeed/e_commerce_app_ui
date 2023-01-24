@@ -1,5 +1,3 @@
-import 'package:e_comerce_app_ui/domain/login_screen/login_auth_function.dart';
-import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
 import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/custom_tile.dart';
 import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/help_card.dart';
 import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/profile_tile.dart';
@@ -28,7 +26,11 @@ class ProfileScreen extends StatelessWidget {
             profileImage: 'assets/images/gaming.jfif',
           ),
           const Divider(),
-          const CustomTile(title: 'Profile', icon: Icons.person_outline),
+          GestureDetector(
+              onTap: () =>
+                  Navigator.of(context).pushNamed('/profile_view_screen'),
+              child: const CustomTile(
+                  title: 'Profile', icon: Icons.person_outline)),
           const CustomTile(title: 'My Cards', icon: Icons.call_to_action),
           const CustomTile(title: 'History', icon: Icons.widgets_outlined),
           const CustomTile(title: 'Settings', icon: Icons.settings),

@@ -47,7 +47,7 @@ class SearchScreen extends StatelessWidget {
                   itemBuilder: (context, index) => const ProductCard(
                     image: 'assets/products/tshirt.png',
                     title: 'Tshirt',
-                    price: '299',
+                    price: 299,
                   ),
                 )
               ],

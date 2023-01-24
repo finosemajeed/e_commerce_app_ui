@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:e_comerce_app_ui/domain/global/global_data.dart';
-import 'package:e_comerce_app_ui/domain/login_screen/login_auth_function.dart';
+import 'package:e_comerce_app_ui/infrastructure/authentication/authentication_service.dart';
 import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
 import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,28 +16,25 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-
-
   void initState() {
     checkLogin();
     Timer(
         const Duration(seconds: 2),
-        () => isLoggedIn
-            ? Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: ((context) => NavigationScreen())))
-            :
-            // StreamBuilder(
-            //       stream: FirebaseAuth.instance.authStateChanges(),
-            //       builder: (context, snapshot) {
-            //         if (snapshot.hasData) {
-            //           return LoginScreen();
-            //         } else {
-            //           return NavigationScreen();
-            //         }
-            //       },
-            //     ));
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: ((context) => LoginScreen()))));
+        () =>
+            // isLoggedIn
+            //     ? Navigator.of(context).pushReplacementNamed('/main_screen')
+            //     :
+            StreamBuilder(
+              stream: AuthentificationService().authStateChanges,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return const LoginScreen();
+                } else {
+                  return MainScreen();
+                }
+              },
+            ));
+    // Navigator.of(context).pushReplacementNamed('/login_screen'));
     super.initState();
   }
 

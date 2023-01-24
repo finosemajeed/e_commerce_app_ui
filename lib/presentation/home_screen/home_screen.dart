@@ -1,12 +1,10 @@
 import 'package:e_comerce_app_ui/core/color_config.dart';
-import 'package:e_comerce_app_ui/presentation/cart_screen/cart_screen.dart';
+
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/custom_offer_card.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/custom_service_card_area.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/product_card_list.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/see_more_action_button.dart';
 import 'package:e_comerce_app_ui/presentation/home_screen/widgets/special_item_card.dart';
-import 'package:e_comerce_app_ui/presentation/notification_screen/notifcation_screen.dart';
-import 'package:e_comerce_app_ui/presentation/widgets/appbar_icon.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
@@ -28,8 +26,7 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: offWhite,
             child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) => const CartScreen())));
+                  Navigator.of(context).pushNamed('/cart_screen');
                 },
                 icon: const Icon(
                   Icons.local_grocery_store_outlined,
@@ -42,8 +39,7 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: offWhite,
             child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) => NotificationScreen())));
+                  Navigator.of(context).pushNamed('/notification_screen');
                 },
                 icon: const Icon(
                   Icons.notifications,
@@ -62,7 +58,12 @@ class HomeScreen extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  const CustomOfferCard(),
+                  GestureDetector(
+                    child: const CustomOfferCard(),
+                    onTap: () {
+                      // context.read<ProductsBloc>().add(FetchProducts());
+                    },
+                  ),
                   const CustomServiceCardArea(),
                   const SeeMoreActionButton(text: 'Special for you'),
                   const SpecialItemCard(),

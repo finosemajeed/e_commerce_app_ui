@@ -1,9 +1,9 @@
-import 'package:e_comerce_app_ui/domain/global/global_data.dart';
-import 'package:e_comerce_app_ui/domain/login_screen/login_auth_function.dart';
-import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
-import 'package:e_comerce_app_ui/presentation/signup_screen/signup_screen.dart';
+import 'package:e_comerce_app_ui/domain/exceptions/messeged_firebaseauth_exception.dart';
+import 'package:e_comerce_app_ui/domain/exceptions/signin_exception.dart';
+import 'package:e_comerce_app_ui/infrastructure/authentication/authentication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordContoller = TextEditingController();
   var formkey = GlobalKey<FormState>();
+  bool signInStatus = false;
   @override
   Widget build(BuildContext context) {
     bool viewPassword = true;
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Please login to continue,',
                   style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 TextFormField(
                   controller: emailController,
                   textInputAction: TextInputAction.next,
@@ -96,21 +97,35 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
                     final isValid = formkey.currentState!.validate();
+                    // bool signInStatus = false;
                     if (isValid) {
-                      final email = emailController.text.trim();
-                      final password = passwordContoller.text.trim();
+                      // final email = emailController.text.trim();
+                      // final password = passwordContoller.text.trim();
 
-                      LoginAuthFunction.signInUser(email, password, context);
-                      if (isLoggedIn) {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NavigationScreen()));
-                      }
+                      // final isLogged = AuthentificationService()
+                      //     .signIn(email: email, password: password);
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (context) {
+                      //     return FutureProgressDialog(
+                      //       isLogged,
+                      //       message: const Text("Signing in to account"),
+                      //       // onError: (e) {
+                      //       //   snackbarMessage = e.toString();
+                      //       // },
+                      //     );
+                      //   },
+                      // );
+                      signInButtonCallback();
+                      // LoginAuthFunction.signInUser(email, password, context);
+                      // if (signInStatus == true) {
+                      //   Navigator.of(context)
+                      //       .pushReplacementNamed('/main_screen');
+                      // }
                     } else {
                       Fluttertoast.showToast(msg: 'Login failed!');
                     }
@@ -133,10 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 TextButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignUpScreen()));
+                      Navigator.of(context).pushNamed('/signup_screen');
                     },
                     child: const Text('Not a User ? Register'))
               ],
@@ -145,5 +157,54 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     ));
+  }
+
+  Future<void> signInButtonCallback() async {
+    if (formkey.currentState!.validate()) {
+      formkey.currentState!.save();
+      final AuthentificationService authService = AuthentificationService();
+
+      String? snackbarMessage;
+      try {
+        final signInFuture = authService.signIn(
+          email: emailController.text.trim(),
+          password: passwordContoller.text.trim(),
+        );
+        //signInFuture.then((value) => signInStatus = value);
+        signInStatus = await showDialog(
+          context: context,
+          builder: (context) {
+            return FutureProgressDialog(
+              signInFuture,
+              message: const Text("Signing in to account"),
+              // onError: (e) {
+              //   snackbarMessage = e.toString();
+              // },
+            );
+          },
+        );
+        if (signInStatus == true) {
+          snackbarMessage = "Signed In Successfully";
+        } else {
+          if (snackbarMessage == null) {
+            throw FirebaseSignInAuthUnknownReasonFailure();
+          } else {
+            throw FirebaseSignInAuthUnknownReasonFailure(
+                message: snackbarMessage);
+          }
+        }
+      } on MessagedFirebaseAuthException catch (e) {
+        snackbarMessage = e.message;
+      } catch (e) {
+        snackbarMessage = e.toString();
+      } finally {
+        // Logger().i(snackbarMessage);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(snackbarMessage.toString()),
+          ),
+        );
+      }
+    }
   }
 }

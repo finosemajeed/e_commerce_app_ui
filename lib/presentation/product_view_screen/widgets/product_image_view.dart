@@ -1,20 +1,19 @@
 import 'package:e_comerce_app_ui/core/color_config.dart';
-import 'package:e_comerce_app_ui/db/data_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductImageView extends StatelessWidget {
   const ProductImageView({
     Key? key,
-    required this.productId,
+    required this.productImage,
   }) : super(key: key);
 
-  final productId;
+  final String productImage;
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       backgroundColor: Colors.white,
-      iconTheme: IconThemeData(color: textBlack),
+      iconTheme: const IconThemeData(color: textBlack),
       elevation: 0,
       pinned: true,
       centerTitle: false,
@@ -23,7 +22,7 @@ class ProductImageView extends StatelessWidget {
         background: Image(
           width: 300,
           height: 300,
-          image: AssetImage(productDetails[productId - 1].productImage!),
+          image: NetworkImage(productImage),
         ),
       ),
     );

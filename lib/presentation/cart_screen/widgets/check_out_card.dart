@@ -1,4 +1,3 @@
-
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:flutter/material.dart';
 
@@ -107,6 +106,10 @@ class CheckOutCard extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: ElevatedButton(
               onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(MediaQuery.of(context).size.width, 50),
+                backgroundColor: offWhite,
+              ),
               child: const Text(
                 'Checkout',
                 style: TextStyle(
@@ -114,10 +117,6 @@ class CheckOutCard extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size(MediaQuery.of(context).size.width, 50),
-                backgroundColor: offWhite,
               ),
             ),
           )

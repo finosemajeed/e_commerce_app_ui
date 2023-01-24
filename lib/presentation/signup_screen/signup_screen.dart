@@ -1,9 +1,8 @@
-import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
-import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
+import 'package:e_comerce_app_ui/domain/exceptions/messeged_firebaseauth_exception.dart';
+import 'package:e_comerce_app_ui/domain/exceptions/signup_exception.dart';
+import 'package:e_comerce_app_ui/infrastructure/authentication/authentication_service.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
-import '../../domain/signup_screen/signup_auth_function.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 
 // ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
@@ -120,15 +119,16 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          final isValid = regKey.currentState!.validate();
-                          final email = emailController.text.trim();
-                          final password = passwordContoller.text.trim();
-                          final userName = userNameController.text.trim();
-                          if (isValid) {
-                            SignupAuthFunction.signupUser(
-                                email, password, userName, context);
-                            Navigator.of(context).pop();
-                          }
+                          // final isValid = regKey.currentState!.validate();
+                          // final email = emailController.text.trim();
+                          // final password = passwordContoller.text.trim();
+                          // final userName = userNameController.text.trim();
+                          // if (isValid) {
+                          //   SignupAuthFunction.signupUser(
+                          //       email, password, userName, context);
+                          //   Navigator.of(context).pop();
+                          // }
+                          signUpButtonCallback(context);
                         },
                         child: const Text('Sign Up'),
                       ),
@@ -143,10 +143,9 @@ class SignUpScreen extends StatelessWidget {
                     const Text('Already have an account?',
                         style: TextStyle(color: Colors.blue)),
                     GestureDetector(
-                      onTap: (() => Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                              builder: ((context) => LoginScreen())))),
-                      child: Text(
+                      onTap: (() => Navigator.of(context)
+                          .pushReplacementNamed('/login_screen')),
+                      child: const Text(
                         'Login',
                         style: TextStyle(color: Colors.blue),
                       ),
@@ -159,5 +158,50 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> signUpButtonCallback(BuildContext context) async {
+    if (regKey.currentState!.validate()) {
+      // goto complete profile page
+      final AuthentificationService authService = AuthentificationService();
+      bool signUpStatus = false;
+      String? snackbarMessage;
+      try {
+        final signUpFuture = authService.signUp(
+            email: emailController.text.trim(),
+            password: passwordContoller.text.trim(),
+            userName: userNameController.text.trim());
+        signUpFuture.then((value) => signUpStatus = value);
+        signUpStatus = await showDialog(
+          context: context,
+          builder: (context) {
+            return FutureProgressDialog(
+              signUpFuture,
+              message: const Text("Creating new account"),
+            );
+          },
+        );
+        if (signUpStatus == true) {
+          snackbarMessage =
+              "Registered successfully, Please verify your email id";
+        } else {
+          throw FirebaseSignUpAuthUnknownReasonFailureException();
+        }
+      } on MessagedFirebaseAuthException catch (e) {
+        snackbarMessage = e.message;
+      } catch (e) {
+        snackbarMessage = e.toString();
+      } finally {
+        // Logger().i(snackbarMessage);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(snackbarMessage.toString()),
+          ),
+        );
+        if (signUpStatus == true) {
+          Navigator.pop(context);
+        }
+      }
+    }
   }
 }

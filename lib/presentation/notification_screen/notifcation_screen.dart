@@ -1,7 +1,5 @@
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:lottie/lottie.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -55,12 +53,12 @@ class NotificationScreen extends StatelessWidget {
                       leading: LottieBuilder.asset(
                           'assets/lottie_animation/giftbox.json'),
                       title: Text(_items[index]),
-                      subtitle: Text('Summer offer flat 50%'),
+                      subtitle: const Text('Summer offer flat 50%'),
                     ),
                   );
                 }),
                 separatorBuilder: (_, int index) {
-                  return Divider();
+                  return const Divider();
                 },
               ),
             )

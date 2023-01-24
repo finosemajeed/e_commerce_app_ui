@@ -1,5 +1,5 @@
-import 'package:e_comerce_app_ui/domain/login_screen/login_auth_function.dart';
-import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
+import 'package:e_comerce_app_ui/core/color_config.dart';
+import 'package:e_comerce_app_ui/infrastructure/authentication/authentication_service.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTile extends StatelessWidget {
@@ -27,10 +27,36 @@ class ProfileTile extends StatelessWidget {
       ),
       trailing: IconButton(
         onPressed: () {
-          LoginAuthFunction.logoutUser();
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: ((context) => LoginScreen())),
-              (route) => false);
+          showDialog(
+              context: context,
+              builder: ((ctx) {
+                return AlertDialog(
+                  content: const Text(
+                      'Are your sure you want to logout from this app?'),
+                  actions: <Widget>[
+                    ElevatedButton(
+                      onPressed: () {
+                        AuthentificationService().signOut();
+                      },
+                      child: Container(
+                        color: offOrange,
+                        padding: const EdgeInsets.all(14),
+                        child: const Text("Logout"),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Container(
+                        color: orange,
+                        padding: const EdgeInsets.all(14),
+                        child: const Text("Continue shopping"),
+                      ),
+                    ),
+                  ],
+                );
+              }));
         },
         icon: const Icon(Icons.logout),
       ),

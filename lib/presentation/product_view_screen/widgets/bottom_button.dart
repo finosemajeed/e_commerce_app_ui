@@ -1,14 +1,19 @@
+import 'package:e_comerce_app_ui/application/cart_screen/cart_screen_bloc.dart';
 import 'package:e_comerce_app_ui/core/color_config.dart';
-import 'package:e_comerce_app_ui/presentation/home_screen/product_view_screen/product_view_screen.dart';
+import 'package:e_comerce_app_ui/db/product_model.dart';
+import 'package:e_comerce_app_ui/presentation/product_view_screen/product_view_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomButton extends StatelessWidget {
   const BottomButton({
     Key? key,
     required this.productPrice,
+    required this.product,
   }) : super(key: key);
 
-  final int? productPrice;
+  final int productPrice;
+  final Products product;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,7 @@ class BottomButton extends StatelessWidget {
               valueListenable: itemPriceNotifier,
               builder: (context, val, _) {
                 return Text(
-                  "${productPrice! * itemPriceNotifier.value}",
+                  "${productPrice * itemPriceNotifier.value}",
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -32,14 +37,15 @@ class BottomButton extends StatelessWidget {
             width: 200,
             height: 50,
             child: ElevatedButton(
-              onPressed: () => 'Null',
+              onPressed: () =>
+                  context.read<CartScreenBloc>().add(CartItemAdded(product)),
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(purple)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    'Buy Now',
+                    'Add to Cart',
                     style: TextStyle(fontSize: 20),
                   )
                 ],

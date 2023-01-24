@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:e_comerce_app_ui/domain/login_screen/login_auth_function.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

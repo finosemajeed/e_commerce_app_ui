@@ -1,4 +1,3 @@
-
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:flutter/material.dart';
 

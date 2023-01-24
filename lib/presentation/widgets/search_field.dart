@@ -11,7 +11,7 @@ class SearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onTap: () {
-        Navigator.of(context).pushNamed('/searchScreen');
+        Navigator.of(context).pushNamed('/search_screen');
       },
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(

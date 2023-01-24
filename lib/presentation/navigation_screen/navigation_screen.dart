@@ -5,12 +5,12 @@ import 'package:e_comerce_app_ui/presentation/profile_screen/profile_screen.dart
 import 'package:e_comerce_app_ui/presentation/navigation_screen/widgets/custom_bottom_navigatoin_bar.dart';
 import 'package:flutter/material.dart';
 
-class NavigationScreen extends StatelessWidget {
-  NavigationScreen({super.key});
+class MainScreen extends StatelessWidget {
+  MainScreen({super.key});
 
   final _pages = [
-    HomeScreen(),
-    FavouriteScreen(),
+    const HomeScreen(),
+    const FavouriteScreen(),
     NotificationScreen(),
     ProfileScreen(),
   ];
