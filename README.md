@@ -6,13 +6,5 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-![Ecommerce app home ui_google-pixel4xl-ohsoorange-portrait](https://user-images.githubusercontent.com/36195634/202363503-b9920d6c-d5ff-4f82-a98f-6324ddb2e829.png)
-
+![Ecommerce home ui 1](https://user-images.githubusercontent.com/36195634/202914170-4440f7ae-8db3-4c8e-8205-78eed5927d4d.png)
+![ECommerce home ui 2](https://user-images.githubusercontent.com/36195634/202914185-b39ef11d-1e02-4657-89b1-e00d2c6d23cd.png)
