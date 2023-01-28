@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:cart_stepper/cart_stepper.dart';
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:e_comerce_app_ui/db/product_model.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +23,11 @@ class CustomCartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Card(
-        elevation: 1,
-        shadowColor: orange,
+    return SizedBox(
+      height: MediaQuery.of(context).size.height / 4,
+      width: MediaQuery.of(context).size.width,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,43 +61,45 @@ class CustomCartItem extends StatelessWidget {
                   builder: (context, state) {
                     if (state is CartLoaded) {
                       return SizedBox(
-                        height: 80,
+                        height: 40,
                         child: Center(
-                          child: CartStepper(
-                            value: 10,
-                            stepper: 10,
-                            didChangeCount: (value) {
-                              context
-                                  .read<CartScreenBloc>()
-                                  .add(CartProductCountEvent(value));
-                            },
+                          child:
+
+                              // CartStepper(
+                              //   value: 10,
+                              //   stepper: 10,
+                              //   didChangeCount: (value) {
+                              //     context
+                              //         .read<CartScreenBloc>()
+                              //         .add(CartProductCountEvent(value));
+                              //   },
+                              // ),
+                              Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.horizontal_rule,
+                                  size: 35,
+                                  color: orange,
+                                ),
+                              ),
+                              Text(
+                                0.toString(),
+                                style: const TextStyle(fontSize: 35),
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.add,
+                                  size: 35,
+                                  color: orange,
+                                ),
+                              ),
+                            ],
                           ),
-                          //  Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          //   crossAxisAlignment: CrossAxisAlignment.center,
-                          //   children: [
-                          //     IconButton(
-                          //       onPressed: () {},
-                          //       icon: const Icon(
-                          //         Icons.horizontal_rule,
-                          //         size: 35,
-                          //         color: orange,
-                          //       ),
-                          //     ),
-                          //     Text(
-                          //       state.count.toString(),
-                          //       style: const TextStyle(fontSize: 35),
-                          //     ),
-                          //     IconButton(
-                          //       onPressed: () {},
-                          //       icon: const Icon(
-                          //         Icons.add,
-                          //         size: 35,
-                          //         color: orange,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
                         ),
                       );
                     }

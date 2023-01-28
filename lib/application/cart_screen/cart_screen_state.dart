@@ -26,23 +26,21 @@ class CartError extends CartScreenState {
 }
 
 class CartAddedSuccefull extends CartScreenState {
-  const CartAddedSuccefull({this.cart = const Cart()});
-  final Cart cart;
+  const CartAddedSuccefull();
 
   @override
-  List<Object?> get props => [cart];
+  List<Object?> get props => [];
 }
 
 class CartRemoveSuccefull extends CartScreenState {
-  const CartRemoveSuccefull({this.cart = const Cart()});
-  final Cart cart;
+  const CartRemoveSuccefull();
 
   @override
-  List<Object?> get props => [cart];
+  List<Object?> get props => [];
 }
 
 class CartProductCount extends CartScreenState {
-  const CartProductCount({this.count = 0});
+  const CartProductCount({this.count = 1});
   final int count;
   @override
   List<Object?> get props => [count];

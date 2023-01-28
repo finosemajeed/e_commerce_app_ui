@@ -5,6 +5,7 @@ import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:e_comerce_app_ui/db/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductDetails {
   const ProductDetails({
@@ -17,7 +18,9 @@ class ProductDetails {
         if (state is CartProductCount) {
           return CartStepper(
             didChangeCount: (value) {
-              context.read<CartScreenBloc>().add(CartProductCountEvent(value));
+              context
+                  .read<CartScreenBloc>()
+                  .add(CartProductCountIntial(count: value));
             },
             value: state.count,
             size: 60,
@@ -149,17 +152,29 @@ class ProductDetails {
               fontWeight: FontWeight.w500,
             ),
           ),
-          BlocBuilder<FavouriteScreenBloc, FavouriteScreenState>(
+          BlocConsumer<FavouriteScreenBloc, FavouriteScreenState>(
+            listener: (context, state) {
+              if (state is FavouriteAdded) {
+                Fluttertoast.showToast(msg: 'Product added to Favourite');
+              } else if (state is FavouriteRemoved) {
+                Fluttertoast.showToast(msg: 'Product removed from Favourite');
+              }
+            },
             builder: (context, state) {
               if (state is FavouriteLoaded) {
                 final isFavourite = state.isFavourite;
                 return IconButton(
                   onPressed: () {
-                    context.read<FavouriteScreenBloc>().add(
-                        FavouriteItemAdded(item: product, isFavourite: true));
+                    isFavourite
+                        ? context
+                            .read<FavouriteScreenBloc>()
+                            .add(FavouriteItemAdded(item: product))
+                        : context
+                            .read<FavouriteScreenBloc>()
+                            .add(FavouriteItemRemoved(item: product));
                   },
                   icon: Icon(
-                    isFavourite ? Icons.favorite : Icons.favorite_border,
+                    isFavourite ? Icons.favorite_border : Icons.favorite,
                     color: Colors.red,
                   ),
                 );

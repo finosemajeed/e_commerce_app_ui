@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:e_comerce_app_ui/application/favourite_screen/favourite_screen_bloc.dart';
 import 'package:e_comerce_app_ui/application/home_screen/products_bloc.dart';
 import 'package:e_comerce_app_ui/presentation/product_view_screen/product_view_screen.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/product_card.dart';
@@ -34,6 +35,9 @@ class ProductCardList extends StatelessWidget {
                   log(index.toString());
                   return GestureDetector(
                     onTap: () {
+                      context
+                          .read<FavouriteScreenBloc>()
+                          .add(FavouriteCheck(product));
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: ((context) => ProductViewScreen(
                                 productId: product.id!,

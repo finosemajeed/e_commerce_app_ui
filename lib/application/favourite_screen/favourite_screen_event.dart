@@ -10,7 +10,7 @@ class FavouriteStarted extends FavouriteScreenEvent {
 }
 
 class FavouriteItemAdded extends FavouriteScreenEvent {
-  const FavouriteItemAdded({required this.item, this.isFavourite = false});
+  const FavouriteItemAdded({required this.item, this.isFavourite = true});
 
   final Products item;
   final bool isFavourite;
@@ -20,10 +20,19 @@ class FavouriteItemAdded extends FavouriteScreenEvent {
 }
 
 class FavouriteItemRemoved extends FavouriteScreenEvent {
-  const FavouriteItemRemoved(this.item);
+  const FavouriteItemRemoved({required this.item, this.isFavourite = false});
 
   final Products item;
+  final bool isFavourite;
 
   @override
   List<Object?> get props => [item];
+}
+
+class FavouriteCheck extends FavouriteScreenEvent {
+  const FavouriteCheck(this.item);
+  final Products item;
+
+  @override
+  List<Object?> get props => [];
 }

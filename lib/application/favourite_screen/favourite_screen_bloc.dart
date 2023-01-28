@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:e_comerce_app_ui/db/product_model.dart';
-import 'package:e_comerce_app_ui/db/product_repository.dart';
+import 'package:e_comerce_app_ui/domain/fetch_products/fetch_product.dart';
 import 'package:e_comerce_app_ui/infrastructure/favourite_screen/favourite_screen_helper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,12 +16,11 @@ class FavouriteScreenBloc
       emit(const FavouriteLoading());
       if (event is FavouriteStarted) {
         emit(const FavouriteLoading());
-        emit(const FavouriteLoaded());
         try {
-          var productList = await ProductRepository.fetchProducts();
-          var favouriteItems =
-              await FavouriteScreenHelper().usersFavouriteProductsList;
-          log(favouriteItems.toString(), name: 'favourite list');
+          final favouriteItems = await FetchProduct().favouriteProduts();
+
+          emit(FavouriteLoaded(
+              favouriteItems: favouriteItems, isFavourite: true));
         } catch (e) {
           log(e.toString(), name: 'favourite load error');
           emit(FavouriteError());
@@ -30,16 +29,36 @@ class FavouriteScreenBloc
         try {
           final productId = event.item.id.toString();
           final isFavourite = event.isFavourite;
-          final status =
-              await FavouriteScreenHelper().isProductFavourite(productId);
-          if (status == false) {
-            await FavouriteScreenHelper()
-                .switchProductFavouriteStatus(productId, isFavourite);
-          }
+          await FavouriteScreenHelper()
+              .switchProductFavouriteStatus(productId, isFavourite);
+          emit(FavouriteAdded());
+          final favouriteItems = await FetchProduct().favouriteProduts();
+          emit(FavouriteLoaded(favouriteItems: favouriteItems));
         } catch (e) {
           log(e.toString(), name: 'favourite add error');
           emit(FavouriteError());
         }
+      } else if (event is FavouriteItemRemoved) {
+        try {
+          final productId = event.item.id.toString();
+          final isFavourite = event.isFavourite;
+          await FavouriteScreenHelper()
+              .switchProductFavouriteStatus(productId, isFavourite);
+          emit(FavouriteRemoved());
+          final favouriteItems = await FetchProduct().favouriteProduts();
+          emit(FavouriteLoaded(favouriteItems: favouriteItems));
+        } catch (e) {
+          log(e.toString(), name: 'favourite remove error');
+          emit(FavouriteError());
+        }
+      } else if (event is FavouriteCheck) {
+        final productId = event.item.id.toString();
+        final state =
+            await FavouriteScreenHelper().isProductFavourite(productId);
+        emit(FavouriteCheckState(state));
+        final favouriteItems = await FetchProduct().favouriteProduts();
+        emit(
+            FavouriteLoaded(favouriteItems: favouriteItems, isFavourite: true));
       }
     });
   }

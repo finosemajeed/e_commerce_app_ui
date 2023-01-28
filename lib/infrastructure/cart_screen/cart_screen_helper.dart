@@ -44,7 +44,7 @@ class CartHelper {
     if (alreadyPresent == false) {
       docRef.set(CartItem(itemCount: 1, id: productId).toMap());
     } else {
-      docRef.update({CartItem.ITEM_COUNT_KEY: FieldValue.increment(1)});
+      // docRef.update({CartItem.ITEM_COUNT_KEY: FieldValue.increment(1)});
     }
     return true;
   }

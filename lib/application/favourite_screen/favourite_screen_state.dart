@@ -12,8 +12,9 @@ class FavouriteLoading extends FavouriteScreenState {
 }
 
 class FavouriteLoaded extends FavouriteScreenState {
-  const FavouriteLoaded({this.isFavourite = false});
+  const FavouriteLoaded({this.favouriteItems, this.isFavourite = false});
   final bool isFavourite;
+  final List<Products>? favouriteItems;
 
   @override
   List<Object> get props => [];
@@ -24,7 +25,19 @@ class FavouriteError extends FavouriteScreenState {
   List<Object> get props => [];
 }
 
-class FavouriteAdd extends FavouriteScreenState {
+class FavouriteAdded extends FavouriteScreenState {
+  @override
+  List<Object> get props => [];
+}
+
+class FavouriteRemoved extends FavouriteScreenState {
+  @override
+  List<Object> get props => [];
+}
+
+class FavouriteCheckState extends FavouriteScreenState {
+  const FavouriteCheckState(this.isFavourite);
+  final bool isFavourite;
   @override
   List<Object> get props => [];
 }

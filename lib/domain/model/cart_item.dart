@@ -1,4 +1,3 @@
-import 'package:e_comerce_app_ui/db/product_model.dart';
 import 'package:e_comerce_app_ui/domain/model/model.dart';
 
 class CartItem extends Model {
@@ -8,8 +7,7 @@ class CartItem extends Model {
   static const String ITEM_COUNT_KEY = "item_count";
 
   final int itemCount;
-  final List<Products>? items;
-  const CartItem({String? id, this.itemCount = 0, this.items}) : super(id);
+  const CartItem({String? id, this.itemCount = 0}) : super(id);
   //  : super(id!);
 
   factory CartItem.fromMap(Map<String, dynamic> map, {String? id}) {

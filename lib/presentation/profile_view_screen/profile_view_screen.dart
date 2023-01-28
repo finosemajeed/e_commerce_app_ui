@@ -23,4 +23,3 @@ class ProfileViewScreen extends StatelessWidget {
     );
   }
 }
-git 
