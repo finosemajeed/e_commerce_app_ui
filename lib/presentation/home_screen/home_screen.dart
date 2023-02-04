@@ -1,14 +1,9 @@
-import 'package:e_comerce_app_ui/application/cart_screen/cart_screen_bloc.dart';
 import 'package:e_comerce_app_ui/application/search_screen/search_screen_bloc.dart';
 import 'package:e_comerce_app_ui/core/color_config.dart';
+import 'package:e_comerce_app_ui/presentation/home_screen/widgets/widgets_home.dart';
 
-import 'package:e_comerce_app_ui/presentation/home_screen/widgets/custom_offer_card.dart';
-import 'package:e_comerce_app_ui/presentation/home_screen/widgets/custom_service_card_area.dart';
-import 'package:e_comerce_app_ui/presentation/home_screen/widgets/product_card_list.dart';
-import 'package:e_comerce_app_ui/presentation/home_screen/widgets/see_more_action_button.dart';
-import 'package:e_comerce_app_ui/presentation/home_screen/widgets/special_item_card.dart';
-import 'package:e_comerce_app_ui/presentation/search_screen/search_screen.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/search_field.dart';
+import 'package:e_comerce_app_ui/presentation/widgets/widgets_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     //     context.read<SearchScreenBloc>().add(const Initilize());
     //   },
     // );
- 
+
     return BlocConsumer<SearchScreenBloc, SearchScreenState>(
       listener: (context, state) {
         // if (state.searchResultList.isNotEmpty) {

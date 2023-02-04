@@ -1,15 +1,25 @@
 import 'Model.dart';
 
 class Address extends Model {
+  // ignore: constant_identifier_names
   static const String TITLE_KEY = "title";
+  // ignore: constant_identifier_names
   static const String ADDRESS_LINE_1_KEY = "address_line_1";
+  // ignore: constant_identifier_names
   static const String ADDRESS_LINE_2_KEY = "address_line_2";
+  // ignore: constant_identifier_names
   static const String CITY_KEY = "city";
+  // ignore: constant_identifier_names
   static const String DISTRICT_KEY = "district";
+  // ignore: constant_identifier_names
   static const String STATE_KEY = "state";
+  // ignore: constant_identifier_names
   static const String LANDMARK_KEY = "landmark";
+  // ignore: constant_identifier_names
   static const String PINCODE_KEY = "pincode";
+  // ignore: constant_identifier_names
   static const String RECEIVER_KEY = "receiver";
+  // ignore: constant_identifier_names
   static const String PHONE_KEY = "phone";
 
   String? title;

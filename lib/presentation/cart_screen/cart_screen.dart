@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:e_comerce_app_ui/application/cart_screen/cart_screen_bloc.dart';
 import 'package:e_comerce_app_ui/core/color_config.dart';
-import 'package:e_comerce_app_ui/presentation/cart_screen/widgets/check_out_card.dart';
-import 'package:e_comerce_app_ui/presentation/cart_screen/widgets/custom_cart_item.dart';
+import 'package:e_comerce_app_ui/presentation/cart_screen/widgets/widgets_cart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';

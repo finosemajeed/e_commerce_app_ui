@@ -1,8 +1,6 @@
-import 'package:e_comerce_app_ui/presentation/favourite_screen/favourite_screen.dart';
-import 'package:e_comerce_app_ui/presentation/home_screen/home_screen.dart';
-import 'package:e_comerce_app_ui/presentation/notification_screen/notifcation_screen.dart';
-import 'package:e_comerce_app_ui/presentation/profile_screen/profile_screen.dart';
-import 'package:e_comerce_app_ui/presentation/navigation_screen/widgets/custom_bottom_navigatoin_bar.dart';
+import 'package:e_comerce_app_ui/presentation/main_screen/widgets/widgets_navigation.dart';
+import 'package:e_comerce_app_ui/presentation/widgets/widgets_screens.dart';
+
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {

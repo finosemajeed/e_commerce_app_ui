@@ -50,8 +50,7 @@ class FavouriteScreenBloc
         await FavouriteScreenHelper()
             .switchProductFavouriteStatus(productId, true);
         final favouriteItems = await FetchProduct().favouriteProduts();
-        final state =
-            await FavouriteScreenHelper().isProductFavourite(productId);
+      
         emit(FavouriteScreenState(
           isLoading: false,
           isError: false,
@@ -78,8 +77,7 @@ class FavouriteScreenBloc
         await FavouriteScreenHelper()
             .switchProductFavouriteStatus(productId, false);
         final favouriteItems = await FetchProduct().favouriteProduts();
-        final state =
-            await FavouriteScreenHelper().isProductFavourite(productId);
+       
         emit(FavouriteScreenState(
           isLoading: false,
           isError: false,

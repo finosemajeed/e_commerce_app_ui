@@ -32,7 +32,8 @@ class CustomCartItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            Container(
+              color: Colors.white,
               height: 150,
               width: 150,
               child: Image.network(productImage),

@@ -1,5 +1,6 @@
 import 'package:e_comerce_app_ui/application/search_screen/search_screen_bloc.dart';
-import 'package:e_comerce_app_ui/presentation/search_screen/widgets/result_badge.dart';
+import 'package:e_comerce_app_ui/presentation/search_screen/widgets/widgets_search.dart';
+
 import 'package:e_comerce_app_ui/presentation/widgets/appbar_icon.dart';
 import 'package:e_comerce_app_ui/presentation/widgets/product_card.dart';
 import 'package:flutter/material.dart';

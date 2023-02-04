@@ -1,4 +1,3 @@
-import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -28,7 +27,8 @@ class ProductCard extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: offWhite, borderRadius: BorderRadius.circular(20)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)),
                 height: 180,
                 child: Center(
                   child: SizedBox(

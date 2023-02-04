@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:e_comerce_app_ui/domain/global/global_data.dart';
 import 'package:e_comerce_app_ui/infrastructure/authentication/authentication_service.dart';
-import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
-import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
+import 'package:e_comerce_app_ui/presentation/widgets/widgets_screens.dart';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -17,7 +16,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    checkLogin();
     Timer(
         const Duration(seconds: 2),
         () =>

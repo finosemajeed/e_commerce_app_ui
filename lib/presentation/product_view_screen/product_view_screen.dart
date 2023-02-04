@@ -1,9 +1,8 @@
 import 'package:e_comerce_app_ui/application/cart_screen/cart_screen_bloc.dart';
 import 'package:e_comerce_app_ui/application/favourite_screen/favourite_screen_bloc.dart';
 import 'package:e_comerce_app_ui/application/home_screen/products_bloc.dart';
-import 'package:e_comerce_app_ui/presentation/product_view_screen/widgets/bottom_button.dart';
-import 'package:e_comerce_app_ui/presentation/product_view_screen/widgets/product_details.dart';
-import 'package:e_comerce_app_ui/presentation/product_view_screen/widgets/product_image_view.dart';
+import 'package:e_comerce_app_ui/presentation/product_view_screen/widgets/widgets_product_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';

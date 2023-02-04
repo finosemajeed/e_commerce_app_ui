@@ -45,15 +45,15 @@ class UserDatabaseHelper {
     });
   }
 
-  Future<void> updateUser(
-      String userName, String userEmail, String phone) async {
-    String uid = AuthentificationService().currentUser!.uid;
+  // Future<void> updateUser(
+  //     String userName, String userEmail, String phone) async {
+  //   String uid = AuthentificationService().currentUser!.uid;
 
-    final updateUser = firestore!
-        .collection(USERS_COLLECTION_NAME)
-        .doc(uid)
-        .update({PHONE_KEY: phone, USER_NAME: userName, USER_EMAIL: userEmail});
-  }
+  //   final updateUser = firestore!
+  //       .collection(USERS_COLLECTION_NAME)
+  //       .doc(uid)
+  //       .update({PHONE_KEY: phone, USER_NAME: userName, USER_EMAIL: userEmail});
+  // }
 
   Future<void> deleteCurrentUserData() async {
     final uid = AuthentificationService().currentUser!.uid;
@@ -188,4 +188,43 @@ class UserDatabaseHelper {
     );
     return true;
   }
+
+
+  //   Future<bool> addToMyOrders(List<OrderedProduct> orders) async {
+  //   String uid = AuthentificationService().currentUser!.uid;
+  //   final orderedProductsCollectionRef = firestore!
+  //       .collection(USERS_COLLECTION_NAME)
+  //       .doc(uid)
+  //       .collection(ORDERED_PRODUCTS_COLLECTION_NAME);
+  //   for (final order in orders) {
+  //     await orderedProductsCollectionRef.add(order.toMap());
+  //   }
+  //   return true;
+  // }
+
+  // Future<OrderedProduct> getOrderedProductFromId(String id) async {
+  //   String uid = AuthentificationService().currentUser!.uid;
+  //   final doc = await firestore!
+  //       .collection(USERS_COLLECTION_NAME)
+  //       .doc(uid)
+  //       .collection(ORDERED_PRODUCTS_COLLECTION_NAME)
+  //       .doc(id)
+  //       .get();
+  //   final orderedProduct = OrderedProduct.fromMap(doc.data(), id: doc.id);
+  //   return orderedProduct;
+  // }
+
+  // Future<List> get orderedProductsList async {
+  //   String uid = AuthentificationService().currentUser!.uid;
+  //   final orderedProductsSnapshot = await firestore!
+  //       .collection(USERS_COLLECTION_NAME)
+  //       .doc(uid)
+  //       .collection(ORDERED_PRODUCTS_COLLECTION_NAME)
+  //       .get();
+  //   List orderedProductsId = <String>[];
+  //   for (final doc in orderedProductsSnapshot.docs) {
+  //     orderedProductsId.add(doc.id);
+  //   }
+  //   return orderedProductsId;
+  // }
 }

@@ -1,6 +1,4 @@
-import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/custom_tile.dart';
-import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/help_card.dart';
-import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/profile_tile.dart';
+import 'package:e_comerce_app_ui/presentation/profile_screen/widgets/widgets_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
