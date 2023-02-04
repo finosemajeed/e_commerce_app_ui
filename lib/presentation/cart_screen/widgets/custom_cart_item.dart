@@ -57,55 +57,7 @@ class CustomCartItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                BlocBuilder<CartScreenBloc, CartScreenState>(
-                  builder: (context, state) {
-                    if (state is CartLoaded) {
-                      return SizedBox(
-                        height: 40,
-                        child: Center(
-                          child:
-
-                              // CartStepper(
-                              //   value: 10,
-                              //   stepper: 10,
-                              //   didChangeCount: (value) {
-                              //     context
-                              //         .read<CartScreenBloc>()
-                              //         .add(CartProductCountEvent(value));
-                              //   },
-                              // ),
-                              Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.horizontal_rule,
-                                  size: 35,
-                                  color: orange,
-                                ),
-                              ),
-                              Text(
-                                0.toString(),
-                                style: const TextStyle(fontSize: 35),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.add,
-                                  size: 35,
-                                  color: orange,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                    return const Spacer();
-                  },
-                ),
+                CartCountButton(products: product),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -127,7 +79,7 @@ class CustomCartItem extends StatelessWidget {
                       log(product.id.toString(), name: 'delete cart item');
                       context
                           .read<CartScreenBloc>()
-                          .add(CartItemRemoved(product));
+                          .add(CartItemRemoved(product: product));
                     },
                     icon: const Icon(
                       Icons.delete,
@@ -139,6 +91,58 @@ class CustomCartItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CartCountButton extends StatelessWidget {
+  const CartCountButton({
+    super.key,
+    required this.products,
+  });
+  final Products products;
+
+  @override
+  Widget build(BuildContext context) {
+    // WidgetsBinding.instance.addPostFrameCallback(
+    //   (_) {
+    //     context.read<CartScreenBloc>().add(CartItemCount(product: products));
+    //   },
+    // );
+    return BlocBuilder<CartScreenBloc, CartScreenState>(
+      builder: (context, state) {
+        return SizedBox(
+          height: 40,
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.horizontal_rule,
+                    size: 35,
+                    color: orange,
+                  ),
+                ),
+                Text(
+                  state.itemCount.toString(),
+                  style: const TextStyle(fontSize: 35),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.add,
+                    size: 35,
+                    color: orange,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

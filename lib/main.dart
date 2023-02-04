@@ -1,6 +1,7 @@
 import 'package:e_comerce_app_ui/application/cart_screen/cart_screen_bloc.dart';
 import 'package:e_comerce_app_ui/application/favourite_screen/favourite_screen_bloc.dart';
 import 'package:e_comerce_app_ui/application/home_screen/products_bloc.dart';
+import 'package:e_comerce_app_ui/application/search_screen/search_screen_bloc.dart';
 import 'package:e_comerce_app_ui/infrastructure/authentication/authentication_service.dart';
 import 'package:e_comerce_app_ui/presentation/login_screen/login_screen.dart';
 import 'package:e_comerce_app_ui/presentation/navigation_screen/navigation_screen.dart';
@@ -38,10 +39,12 @@ class MainApp extends StatelessWidget {
         BlocProvider<ProductsListBloc>(
             create: ((context) => ProductsListBloc()..add(FetchProducts()))),
         BlocProvider<CartScreenBloc>(
-            create: ((context) => CartScreenBloc()..add(CartStarted()))),
+            create: ((context) => CartScreenBloc()..add(const Started()))),
         BlocProvider<FavouriteScreenBloc>(
             create: ((context) =>
-                FavouriteScreenBloc()..add(FavouriteStarted())))
+                FavouriteScreenBloc()..add(const FavouriteInitial()))),
+        BlocProvider<SearchScreenBloc>(
+            create: (context) => SearchScreenBloc()..add(const Initilize()))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -67,7 +70,7 @@ class MainApp extends StatelessWidget {
           '/home_screen': (context) => const HomeScreen(),
           '/favourite_screen': (context) => const FavouriteScreen(),
           '/cart_screen': (context) => const CartScreen(),
-          '/profile_view_screen': (context) => ProfileViewScreen()
+          '/profile_view_screen': (context) => const ProfileViewScreen()
         },
       ),
     );

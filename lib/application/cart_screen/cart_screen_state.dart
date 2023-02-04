@@ -1,47 +1,69 @@
 part of 'cart_screen_bloc.dart';
 
-class CartScreenState extends Equatable {
-  const CartScreenState();
+@freezed
+class CartScreenState with _$CartScreenState {
+  const factory CartScreenState({
+    required bool isLoading,
+    required Cart cartItems,
+    required bool isError,
+    required bool cartAdded,
+    required bool cartRemoved,
+    required int itemCount,
+    required num cartTotal,
+  }) = _CartScreenState;
 
-  @override
-  List<Object?> get props => [];
+  factory CartScreenState.initial() => const CartScreenState(
+        isLoading: false,
+        cartItems: Cart(),
+        isError: false,
+        cartAdded: false,
+        cartRemoved: false,
+        itemCount: 1,
+        cartTotal: 0,
+      );
 }
+// class CartScreenState extends Equatable {
+//   const CartScreenState();
 
-class CartLoading extends CartScreenState {
-  @override
-  List<Object?> get props => [];
-}
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class CartLoaded extends CartScreenState {
-  const CartLoaded({this.cart = const Cart()});
-  final Cart cart;
+// class CartLoading extends CartScreenState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-  @override
-  List<Object?> get props => [cart];
-}
+// class CartLoaded extends CartScreenState {
+//   const CartLoaded({this.cart = const Cart()});
+//   final Cart cart;
 
-class CartError extends CartScreenState {
-  @override
-  List<Object?> get props => [];
-}
+//   @override
+//   List<Object?> get props => [cart];
+// }
 
-class CartAddedSuccefull extends CartScreenState {
-  const CartAddedSuccefull();
+// class CartError extends CartScreenState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-  @override
-  List<Object?> get props => [];
-}
+// class CartAddedSuccefull extends CartScreenState {
+//   const CartAddedSuccefull();
 
-class CartRemoveSuccefull extends CartScreenState {
-  const CartRemoveSuccefull();
+//   @override
+//   List<Object?> get props => [];
+// }
 
-  @override
-  List<Object?> get props => [];
-}
+// class CartRemoveSuccefull extends CartScreenState {
+//   const CartRemoveSuccefull();
 
-class CartProductCount extends CartScreenState {
-  const CartProductCount({this.count = 1});
-  final int count;
-  @override
-  List<Object?> get props => [count];
-}
+//   @override
+//   List<Object?> get props => [];
+// }
+
+// class CartProductCount extends CartScreenState {
+//   const CartProductCount({this.count = 1});
+//   final int count;
+//   @override
+//   List<Object?> get props => [count];
+// }

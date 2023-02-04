@@ -21,21 +21,19 @@ class NotificationScreen extends StatelessWidget {
               ),
             )
           ],
+          title: const Text(
+            'My Notifications',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w300,
+              color: Colors.black,
+            ),
+          ),
         ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Notifications',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
             Expanded(
               child: ListView.separated(
                 itemCount: _items.length,

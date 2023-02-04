@@ -88,8 +88,9 @@ class CustomFavouriteCard extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {
-                  context.read<FavouriteScreenBloc>().add(
-                      FavouriteItemRemoved(item: product, isFavourite: false));
+                  context
+                      .read<FavouriteScreenBloc>()
+                      .add(FavouriteItemRemoved(item: product));
                 },
                 icon: const Icon(
                   Icons.favorite,

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_comerce_app_ui/db/product_repository.dart';
 import 'package:e_comerce_app_ui/domain/model/cart_item.dart';
 import 'package:e_comerce_app_ui/infrastructure/authentication/authentication_service.dart';
 
@@ -32,7 +33,7 @@ class CartHelper {
     return cartItem;
   }
 
-  Future<bool> addProductToCart(String productId) async {
+  Future<bool> addProductToCart(String productId, int count) async {
     String uid = AuthentificationService().currentUser!.uid;
     final cartCollectionRef = firestore!
         .collection(USERS_COLLECTION_NAME)
@@ -42,7 +43,7 @@ class CartHelper {
     final docSnapshot = await docRef.get();
     bool alreadyPresent = docSnapshot.exists;
     if (alreadyPresent == false) {
-      docRef.set(CartItem(itemCount: 1, id: productId).toMap());
+      docRef.set(CartItem(itemCount: count, id: productId).toMap());
     } else {
       // docRef.update({CartItem.ITEM_COUNT_KEY: FieldValue.increment(1)});
     }
@@ -64,22 +65,22 @@ class CartHelper {
     return orderedProductsUid;
   }
 
-  // Future<num> get cartTotal async {
-  //   String uid = AuthentificationService().currentUser!.uid;
-  //   final cartItems = await firestore!
-  //       .collection(USERS_COLLECTION_NAME)
-  //       .doc(uid)
-  //       .collection(CART_COLLECTION_NAME)
-  //       .get();
-  //   num total = 0.0;
-  //   for (final doc in cartItems.docs) {
-  //     num itemsCount = doc.data()[CartItem.ITEM_COUNT_KEY];
-  //     final allProducts = await ProductRepository.fetchProducts();
-  //     final product = allProducts.elementAt(doc.id.hashCode);
-  //     total += (itemsCount * product.price!.toInt());
-  //   }
-  //   return total;
-  // }
+  Future<num> get cartTotal async {
+    String uid = AuthentificationService().currentUser!.uid;
+    final cartItems = await firestore!
+        .collection(USERS_COLLECTION_NAME)
+        .doc(uid)
+        .collection(CART_COLLECTION_NAME)
+        .get();
+    num total = 0.0;
+    for (final doc in cartItems.docs) {
+      num itemsCount = doc.data()[CartItem.ITEM_COUNT_KEY];
+      final allProducts = ProductRepository.fetchProducts();
+      final product = allProducts.elementAt(int.parse(doc.id) - 1);
+      total += (itemsCount * product.price!.toInt());
+    }
+    return total;
+  }
 
   Future<bool> removeProductFromCart(String cartItemID) async {
     String uid = AuthentificationService().currentUser!.uid;

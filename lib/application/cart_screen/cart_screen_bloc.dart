@@ -4,76 +4,150 @@ import 'package:e_comerce_app_ui/db/cart_model.dart';
 import 'package:e_comerce_app_ui/db/product_model.dart';
 import 'package:e_comerce_app_ui/domain/fetch_products/fetch_product.dart';
 import 'package:e_comerce_app_ui/infrastructure/cart_screen/cart_screen_helper.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'cart_screen_event.dart';
 part 'cart_screen_state.dart';
+part 'cart_screen_bloc.freezed.dart';
 
 class CartScreenBloc extends Bloc<CartScreenEvent, CartScreenState> {
-  CartScreenBloc() : super(CartLoading()) {
-    on<CartScreenEvent>(
-      (event, emit) async {
-        if (event is CartStarted) {
-          try {
-            final cartProducts = await FetchProduct().cartProduct();
-            emit(CartLoaded(cart: Cart(items: cartProducts)));
-          } catch (e) {
-            log(e.toString(), name: 'Cart loaded error');
-            emit(CartError());
-          }
-        } else if (event is CartItemAdded) {
-          try {
-            final productId = event.item.id.toString();
-            await CartHelper().addProductToCart(productId);
-            emit(const CartAddedSuccefull());
-            final cartProducts = await FetchProduct().cartProduct();
-            emit(CartLoaded(cart: Cart(items: cartProducts)));
-          } catch (e) {
-            log(e.toString(), name: 'Cart added error');
-            emit(CartError());
-          }
-        } else if (event is CartItemRemoved) {
-          try {
-            final cartItemID = event.item.id.toString();
-            await CartHelper().removeProductFromCart(cartItemID);
-            emit(const CartRemoveSuccefull());
-            final cartProducts = await FetchProduct().cartProduct();
+  CartScreenBloc() : super(CartScreenState.initial()) {
+    on<Started>((event, emit) async {
+      try {
+        final cartProducts = await FetchProduct().cartProduct();
+        final cartTotal = await CartHelper().cartTotal;
+        emit(CartScreenState(
+          isLoading: false,
+          cartItems: Cart(items: cartProducts),
+          isError: false,
+          cartAdded: false,
+          cartRemoved: false,
+          itemCount: 1,
+          cartTotal: cartTotal,
+        ));
+      } catch (e) {
+        emit(const CartScreenState(
+          isLoading: false,
+          cartItems: Cart(),
+          isError: true,
+          cartAdded: false,
+          cartRemoved: false,
+          itemCount: 1,
+          cartTotal: 0,
+        ));
+        log(e.toString(), name: 'Cart loaded error');
+      }
+    });
 
-            emit(CartLoaded(cart: Cart(items: cartProducts)));
-          } catch (e) {
-            log(e.toString(), name: 'Cart remove error');
-            emit(CartError());
-          }
-        } else if (event is CartProductCountIncrement) {
-          try {
-            final productId = event.item.id.toString();
-            await CartHelper().increaseCartItemCount(productId);
-            final count = await CartHelper().getCartItemFromId(productId);
-            emit(CartProductCount(count: count.itemCount));
-          } catch (e) {
-            log(e.toString(), name: 'Cart count error');
-            emit(CartError());
-          }
-        } else if (event is CartProductCountIncrement) {
-          try {
-            final productId = event.item.id.toString();
-            await CartHelper().increaseCartItemCount(productId);
-            final count = await CartHelper().getCartItemFromId(productId);
-            emit(CartProductCount(count: count.itemCount));
-          } catch (e) {
-            log(e.toString(), name: 'Cart count error');
-            emit(CartError());
-          }
-        } else if (event is CartProductCountIntial) {
-          try {
-            emit(CartProductCount(count: event.count));
-          } catch (e) {
-            log(e.toString(), name: 'Cart count error');
-            emit(CartError());
-          }
-        }
-      },
-    );
+    on<CartItemAdded>((event, emit) async {
+      try {
+        final productId = event.product.id.toString();
+        final productCount = event.productCount;
+        await CartHelper().addProductToCart(productId, productCount);
+        final cartProducts = await FetchProduct().cartProduct();
+        final cartTotal = await CartHelper().cartTotal;
+        emit(CartScreenState(
+          isLoading: false,
+          cartItems: Cart(items: cartProducts),
+          isError: false,
+          cartAdded: true,
+          cartRemoved: false,
+          itemCount: 1,
+          cartTotal: cartTotal,
+        ));
+      } catch (e) {
+        emit(const CartScreenState(
+          isLoading: false,
+          cartItems: Cart(),
+          isError: true,
+          cartAdded: false,
+          cartRemoved: false,
+          itemCount: 1,
+          cartTotal: 0,
+        ));
+        log(e.toString(), name: 'Cart loaded error');
+      }
+    });
+    on<CartItemRemoved>((event, emit) async {
+      try {
+        final cartItemID = event.product.id.toString();
+        await CartHelper().removeProductFromCart(cartItemID);
+        final cartProducts = await FetchProduct().cartProduct();
+        final cartTotal = await CartHelper().cartTotal;
+        emit(CartScreenState(
+          isLoading: false,
+          cartItems: Cart(items: cartProducts),
+          isError: false,
+          cartAdded: true,
+          cartRemoved: false,
+          itemCount: 1,
+          cartTotal: cartTotal,
+        ));
+      } catch (e) {
+        emit(const CartScreenState(
+          isLoading: false,
+          cartItems: Cart(),
+          isError: true,
+          cartAdded: false,
+          cartRemoved: false,
+          itemCount: 1,
+          cartTotal: 0,
+        ));
+        log(e.toString(), name: 'Cart loaded error');
+      }
+    });
+    on<CartItemCountInitial>((event, emit) async {
+      try {
+        final cartProducts = await FetchProduct().cartProduct();
+        emit(CartScreenState(
+          isLoading: false,
+          cartItems: Cart(items: cartProducts),
+          isError: false,
+          cartAdded: false,
+          cartRemoved: false,
+          itemCount: event.count,
+          cartTotal: 0,
+        ));
+      } catch (e) {
+        emit(const CartScreenState(
+            isLoading: false,
+            cartItems: Cart(),
+            isError: true,
+            cartAdded: false,
+            cartRemoved: false,
+            itemCount: 1,
+            cartTotal: 0));
+        log(e.toString(), name: 'Cart loaded error');
+      }
+    });
+    on<CartItemCount>((event, emit) async {
+      try {
+        final productId = event.product.id.toString();
+        final cartProducts = await FetchProduct().cartProduct();
+        final itemCount = await CartHelper().getCartItemFromId(productId);
+        final cartTotal = await CartHelper().cartTotal;
+        emit(CartScreenState(
+          isLoading: false,
+          cartItems: Cart(items: cartProducts),
+          isError: false,
+          cartAdded: false,
+          cartRemoved: false,
+          itemCount: itemCount.itemCount,
+          cartTotal: cartTotal,
+        ));
+      } catch (e) {
+        emit(const CartScreenState(
+          isLoading: false,
+          cartItems: Cart(),
+          isError: true,
+          cartAdded: false,
+          cartRemoved: false,
+          itemCount: 1,
+          cartTotal: 0,
+        ));
+        log(e.toString(), name: 'Cart loaded error');
+      }
+    });
   }
 }

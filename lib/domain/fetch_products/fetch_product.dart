@@ -22,4 +22,9 @@ class FetchProduct {
         .toList();
     return favourite;
   }
+
+  List<Products> allProducts() {
+    final allProducts = ProductRepository.fetchProducts();
+      return allProducts;
+  }
 }

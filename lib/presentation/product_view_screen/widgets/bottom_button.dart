@@ -1,7 +1,6 @@
 import 'package:e_comerce_app_ui/application/cart_screen/cart_screen_bloc.dart';
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:e_comerce_app_ui/db/product_model.dart';
-import 'package:e_comerce_app_ui/presentation/product_view_screen/product_view_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,10 +9,12 @@ class BottomButton extends StatelessWidget {
     Key? key,
     required this.productPrice,
     required this.product,
+    required this.productCount,
   }) : super(key: key);
 
   final int productPrice;
   final Products product;
+  final int productCount;
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +23,19 @@ class BottomButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ValueListenableBuilder(
-              valueListenable: itemPriceNotifier,
-              builder: (context, val, _) {
-                return Text(
-                  "${productPrice * itemPriceNotifier.value}",
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              }),
+          Text(
+            "$productPrice",
+            style: const TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           SizedBox(
             width: 200,
             height: 50,
             child: ElevatedButton(
-              onPressed: () =>
-                  context.read<CartScreenBloc>().add(CartItemAdded(product)),
+              onPressed: () => context.read<CartScreenBloc>().add(
+                  CartItemAdded(product: product, productCount: productCount)),
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(purple)),
               child: Row(

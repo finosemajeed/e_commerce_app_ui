@@ -15,25 +15,22 @@ class ProductDetails {
   Widget addQuantityButton() {
     return Center(child: BlocBuilder<CartScreenBloc, CartScreenState>(
       builder: (context, state) {
-        if (state is CartProductCount) {
-          return CartStepper(
-            didChangeCount: (value) {
-              context
-                  .read<CartScreenBloc>()
-                  .add(CartProductCountIntial(count: value));
-            },
-            value: state.count,
-            size: 60,
-            numberSize: 4,
-            style: const CartStepperStyle(
-              activeForegroundColor: orange,
-              activeBackgroundColor: Colors.transparent,
-              foregroundColor: orange,
-              elevation: 0,
-            ),
-          );
-        }
-        return const Spacer();
+        return CartStepper(
+          didChangeCount: (value) {
+            context
+                .read<CartScreenBloc>()
+                .add(CartItemCountInitial(count: value));
+          },
+          value: state.itemCount,
+          size: 60,
+          numberSize: 4,
+          style: const CartStepperStyle(
+            activeForegroundColor: orange,
+            activeBackgroundColor: Colors.transparent,
+            foregroundColor: orange,
+            elevation: 0,
+          ),
+        );
       },
     ));
     // return SizedBox(
@@ -154,32 +151,32 @@ class ProductDetails {
           ),
           BlocConsumer<FavouriteScreenBloc, FavouriteScreenState>(
             listener: (context, state) {
-              if (state is FavouriteAdded) {
+              if (state.favouriteAdded) {
                 Fluttertoast.showToast(msg: 'Product added to Favourite');
-              } else if (state is FavouriteRemoved) {
+              } else if (state.favouriteRemoved) {
                 Fluttertoast.showToast(msg: 'Product removed from Favourite');
               }
             },
             builder: (context, state) {
-              if (state is FavouriteLoaded) {
-                final isFavourite = state.isFavourite;
-                return IconButton(
-                  onPressed: () {
-                    isFavourite
-                        ? context
-                            .read<FavouriteScreenBloc>()
-                            .add(FavouriteItemAdded(item: product))
-                        : context
-                            .read<FavouriteScreenBloc>()
-                            .add(FavouriteItemRemoved(item: product));
-                  },
-                  icon: Icon(
-                    isFavourite ? Icons.favorite_border : Icons.favorite,
-                    color: Colors.red,
-                  ),
-                );
-              }
-              return const Spacer();
+              final isFavourite = state.isFavourite;
+              return IconButton(
+                onPressed: () {
+                  // context
+                  //     .read<FavouriteScreenBloc>()
+                  //     .add(FavouriteItemAdded(item: product));
+                  isFavourite
+                      ? context
+                          .read<FavouriteScreenBloc>()
+                          .add(FavouriteItemRemoved(item: product))
+                      : context
+                          .read<FavouriteScreenBloc>()
+                          .add(FavouriteItemAdded(item: product));
+                },
+                icon: Icon(
+                  isFavourite ? Icons.favorite : Icons.favorite_border,
+                  color: Colors.red,
+                ),
+              );
             },
           ),
         ],

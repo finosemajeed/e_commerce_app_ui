@@ -1,4 +1,5 @@
 import 'package:e_comerce_app_ui/application/cart_screen/cart_screen_bloc.dart';
+import 'package:e_comerce_app_ui/application/favourite_screen/favourite_screen_bloc.dart';
 import 'package:e_comerce_app_ui/application/home_screen/products_bloc.dart';
 import 'package:e_comerce_app_ui/presentation/product_view_screen/widgets/bottom_button.dart';
 import 'package:e_comerce_app_ui/presentation/product_view_screen/widgets/product_details.dart';
@@ -6,8 +7,6 @@ import 'package:e_comerce_app_ui/presentation/product_view_screen/widgets/produc
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-ValueNotifier<int> itemPriceNotifier = ValueNotifier(1);
 
 class ProductViewScreen extends StatelessWidget {
   const ProductViewScreen({
@@ -19,11 +18,22 @@ class ProductViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int productPrice;
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        context.read<CartScreenBloc>().add(const Started());
+      },
+    );
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        context
+            .read<FavouriteScreenBloc>()
+            .add(FavouriteCheck(item: productId));
+      },
+    );
     return SafeArea(
       child: BlocListener<CartScreenBloc, CartScreenState>(
         listener: (context, state) {
-          if (state is CartAddedSuccefull) {
+          if (state.cartAdded) {
             Fluttertoast.showToast(msg: 'Product Added to Cart');
           }
         },
@@ -56,9 +66,18 @@ class ProductViewScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                bottomNavigationBar: BottomButton(
-                  productPrice: product.price?.toInt() ?? 0,
-                  product: product,
+                bottomNavigationBar:
+                    BlocBuilder<CartScreenBloc, CartScreenState>(
+                  builder: (context, state) {
+                    final count = state.itemCount;
+                    final productPrice = product.price!.toInt();
+                    final finalPrice = count * productPrice;
+                    return BottomButton(
+                      productCount: state.itemCount,
+                      productPrice: finalPrice,
+                      product: product,
+                    );
+                  },
                 ),
               );
             }
