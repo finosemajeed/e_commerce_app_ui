@@ -75,7 +75,7 @@ class CartHelper {
     num total = 0.0;
     for (final doc in cartItems.docs) {
       num itemsCount = doc.data()[CartItem.ITEM_COUNT_KEY];
-      final allProducts = ProductRepository.fetchProducts();
+      final allProducts = await ProductRepository.fetchProducts();
       final product = allProducts.elementAt(int.parse(doc.id) - 1);
       total += (itemsCount * product.price!.toInt());
     }

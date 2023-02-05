@@ -1,5 +1,6 @@
 import 'package:e_comerce_app_ui/db/dummy_data.dart';
 import 'package:e_comerce_app_ui/db/product_model.dart';
+// import 'package:http/http.dart' as http;
 
 // class ProductRepository {
 //   static Future<List<Products>> fetchProducts() async {

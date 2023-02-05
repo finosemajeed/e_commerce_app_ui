@@ -14,6 +14,15 @@ part 'cart_screen_bloc.freezed.dart';
 class CartScreenBloc extends Bloc<CartScreenEvent, CartScreenState> {
   CartScreenBloc() : super(CartScreenState.initial()) {
     on<Started>((event, emit) async {
+      emit(const CartScreenState(
+        isLoading: true,
+        cartItems: Cart(),
+        isError: false,
+        cartAdded: false,
+        cartRemoved: false,
+        itemCount: 1,
+        cartTotal: 0,
+      ));
       try {
         final cartProducts = await FetchProduct().cartProduct();
         final cartTotal = await CartHelper().cartTotal;
@@ -66,7 +75,7 @@ class CartScreenBloc extends Bloc<CartScreenEvent, CartScreenState> {
           itemCount: 1,
           cartTotal: 0,
         ));
-        log(e.toString(), name: 'Cart loaded error');
+        log(e.toString(), name: 'Cart Added error');
       }
     });
     on<CartItemRemoved>((event, emit) async {
@@ -94,7 +103,7 @@ class CartScreenBloc extends Bloc<CartScreenEvent, CartScreenState> {
           itemCount: 1,
           cartTotal: 0,
         ));
-        log(e.toString(), name: 'Cart loaded error');
+        log(e.toString(), name: 'Cart Removed error');
       }
     });
     on<CartItemCountInitial>((event, emit) async {
@@ -118,7 +127,7 @@ class CartScreenBloc extends Bloc<CartScreenEvent, CartScreenState> {
             cartRemoved: false,
             itemCount: 1,
             cartTotal: 0));
-        log(e.toString(), name: 'Cart loaded error');
+        log(e.toString(), name: 'Cart Count Initial error');
       }
     });
     on<CartItemCount>((event, emit) async {
@@ -146,7 +155,7 @@ class CartScreenBloc extends Bloc<CartScreenEvent, CartScreenState> {
           itemCount: 1,
           cartTotal: 0,
         ));
-        log(e.toString(), name: 'Cart loaded error');
+        log(e.toString(), name: 'Cart count error');
       }
     });
   }

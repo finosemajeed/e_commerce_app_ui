@@ -16,6 +16,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       extendBody: true,
       body: ValueListenableBuilder(
         builder: ((context, value, _) => _pages[value]),

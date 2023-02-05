@@ -1,3 +1,4 @@
+import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -33,8 +34,9 @@ class ProductCard extends StatelessWidget {
                 child: Center(
                   child: SizedBox(
                     width: 180,
-                    child: Image.network(
-                      image,
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/lottie_animation/image_loading.gif',
+                      image: image,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -47,7 +49,7 @@ class ProductCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -56,6 +58,7 @@ class ProductCard extends StatelessWidget {
                 child: Text(
                   '₹ $price',
                   style: const TextStyle(
+                    color: orange,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),

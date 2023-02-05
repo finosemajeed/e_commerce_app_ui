@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:e_comerce_app_ui/db/product_model.dart';
+import 'package:e_comerce_app_ui/presentation/product_view_screen/product_view_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,11 +31,18 @@ class CustomCartItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              color: Colors.white,
-              height: 150,
-              width: 150,
-              child: Image.network(productImage),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) =>
+                        ProductViewScreen(productId: product.id!.toInt())));
+              },
+              child: Container(
+                color: Colors.white,
+                height: 150,
+                width: 150,
+                child: Image.network(productImage),
+              ),
             ),
             Column(
               mainAxisSize: MainAxisSize.min,
@@ -53,12 +59,46 @@ class CustomCartItem extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 25,
                         color: textBlack,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ),
                 ),
-                CartCountButton(products: product),
+                BlocBuilder<CartScreenBloc, CartScreenState>(
+                  builder: (context, state) {
+                    return SizedBox(
+                      height: 40,
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.horizontal_rule,
+                                size: 35,
+                                color: orange,
+                              ),
+                            ),
+                            Text(
+                              state.itemCount.toString(),
+                              style: const TextStyle(fontSize: 35),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.add,
+                                size: 35,
+                                color: orange,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -77,7 +117,6 @@ class CustomCartItem extends StatelessWidget {
               builder: (context, state) {
                 return IconButton(
                     onPressed: () {
-                      log(product.id.toString(), name: 'delete cart item');
                       context
                           .read<CartScreenBloc>()
                           .add(CartItemRemoved(product: product));
@@ -92,58 +131,6 @@ class CustomCartItem extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class CartCountButton extends StatelessWidget {
-  const CartCountButton({
-    super.key,
-    required this.products,
-  });
-  final Products products;
-
-  @override
-  Widget build(BuildContext context) {
-    // WidgetsBinding.instance.addPostFrameCallback(
-    //   (_) {
-    //     context.read<CartScreenBloc>().add(CartItemCount(product: products));
-    //   },
-    // );
-    return BlocBuilder<CartScreenBloc, CartScreenState>(
-      builder: (context, state) {
-        return SizedBox(
-          height: 40,
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.horizontal_rule,
-                    size: 35,
-                    color: orange,
-                  ),
-                ),
-                Text(
-                  state.itemCount.toString(),
-                  style: const TextStyle(fontSize: 35),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add,
-                    size: 35,
-                    color: orange,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

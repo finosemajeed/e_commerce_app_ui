@@ -17,12 +17,18 @@ class ProductImageView extends StatelessWidget {
       elevation: 0,
       pinned: true,
       centerTitle: false,
-      expandedHeight: 300,
+      expandedHeight: 250,
       flexibleSpace: FlexibleSpaceBar(
-        background: Image(
-          width: 300,
-          height: 300,
-          image: NetworkImage(productImage),
+        background: Column(
+          children: [
+            SizedBox(height: MediaQuery.of(context).padding.top),
+            FadeInImage.assetNetwork(
+              height: 250,
+              width: 200,
+              placeholder: 'assets/lottie_animation/image_loading.gif',
+              image: productImage,
+            )
+          ],
         ),
       ),
     );

@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCardList extends StatelessWidget {
-  const ProductCardList({
-    Key? key,
-  }) : super(key: key);
+  const ProductCardList(
+      {Key? key, this.direction = Axis.horizontal, this.productCount = 0})
+      : super(key: key);
+  final direction;
+  final productCount;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,9 @@ class ProductCardList extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 primary: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: state.productList.length,
+                scrollDirection: direction,
+                itemCount:
+                    productCount <= 0 ? state.productList.length : productCount,
                 itemBuilder: (context, index) {
                   final product = state.productList[index];
                   log(index.toString());

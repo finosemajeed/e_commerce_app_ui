@@ -1,4 +1,3 @@
-
 import 'package:e_comerce_app_ui/application/search_screen/search_screen_bloc.dart';
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:e_comerce_app_ui/core/strings.dart';
@@ -17,6 +16,7 @@ class SearchField extends StatelessWidget {
         context.read<SearchScreenBloc>().add(const Initilize());
       },
     );
+    
     return TextFormField(
       onChanged: (data) {
         context

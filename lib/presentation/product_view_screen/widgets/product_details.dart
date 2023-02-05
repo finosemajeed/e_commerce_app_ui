@@ -33,47 +33,6 @@ class ProductDetails {
         );
       },
     ));
-    // return SizedBox(
-    //   height: 80,
-    //   child: Center(
-    //     child: ValueListenableBuilder(
-    //         valueListenable: itemPriceNotifier,
-    //         builder: (context, val, _) {
-    //           return Row(
-    //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //             crossAxisAlignment: CrossAxisAlignment.center,
-    //             children: [
-    //               IconButton(
-    //                 onPressed: () {
-    //                   itemPriceNotifier.value > 1
-    //                       ? itemPriceNotifier.value--
-    //                       : itemPriceNotifier.value;
-    //                 },
-    //                 icon: const Icon(
-    //                   Icons.horizontal_rule,
-    //                   size: 35,
-    //                   color: orange,
-    //                 ),
-    //               ),
-    //               Text(
-    //                 "$val",
-    //                 style: const TextStyle(fontSize: 35),
-    //               ),
-    //               IconButton(
-    //                 onPressed: () {
-    //                   itemPriceNotifier.value++;
-    //                 },
-    //                 icon: const Icon(
-    //                   Icons.add,
-    //                   size: 35,
-    //                   color: orange,
-    //                 ),
-    //               ),
-    //             ],
-    //           );
-    //         }),
-    //   ),
-    // );
   }
 
   Widget productDescription(String productDescription) {

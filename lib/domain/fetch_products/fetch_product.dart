@@ -5,7 +5,7 @@ import 'package:e_comerce_app_ui/infrastructure/favourite_screen/favourite_scree
 
 class FetchProduct {
   Future<List<Products>> cartProduct() async {
-    var productList = ProductRepository.fetchProducts();
+    var productList = await ProductRepository.fetchProducts();
     var cartIds = await CartHelper().allCartItemsList;
     final cartProducts =
         productList.where((element) => cartIds!.contains(element.id)).toList();
@@ -13,7 +13,7 @@ class FetchProduct {
   }
 
   Future<List<Products>> favouriteProduts() async {
-    var productList = ProductRepository.fetchProducts();
+    var productList = await ProductRepository.fetchProducts();
     var favouriteItems =
         await FavouriteScreenHelper().usersFavouriteProductsList;
     final newlist = favouriteItems.cast<String>();
@@ -23,8 +23,8 @@ class FetchProduct {
     return favourite;
   }
 
-  List<Products> allProducts() {
-    final allProducts = ProductRepository.fetchProducts();
-      return allProducts;
+  Future<List<Products>> allProducts() async {
+    final allProducts = await ProductRepository.fetchProducts();
+    return allProducts;
   }
 }

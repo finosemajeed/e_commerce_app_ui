@@ -1,6 +1,7 @@
 import 'package:e_comerce_app_ui/application/favourite_screen/favourite_screen_bloc.dart';
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:e_comerce_app_ui/presentation/favourite_screen/widgets/widget_favourite.dart';
+import 'package:e_comerce_app_ui/presentation/widgets/product_loading.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,7 @@ class FavouriteScreen extends StatelessWidget {
                   );
                 },
               ),
-            )
+            ),
           ],
           title: const Text(
             'My favourite',
@@ -60,8 +61,11 @@ class FavouriteScreen extends StatelessWidget {
               builder: (context, state) {
                 final favouriteItem = state.favouriteItems;
                 if (state.isLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return Column(
+                    children: const [
+                      ProductLoading(),
+                      ProductLoading(),
+                    ],
                   );
                 }
                 if (favouriteItem!.isNotEmpty) {
@@ -86,6 +90,8 @@ class FavouriteScreen extends StatelessWidget {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.15),
                       LottieBuilder.asset(
                         'assets/lottie_animation/empty_box.json',
                         width: MediaQuery.of(context).size.width / 1.5,

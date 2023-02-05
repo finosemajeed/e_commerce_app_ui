@@ -14,26 +14,38 @@ class SpecialItemCard extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        children: const [
-          _ItemCard(
-            image: 'assets/images/gaming.jfif',
-            titel: 'Game',
-            subtitle: '5 Brands',
+        children: [
+          GestureDetector(
+            onTap: () => Navigator.of(context).pushNamed('/search_screen'),
+            child: const _ItemCard(
+              image: 'assets/images/gaming.jfif',
+              titel: 'Game',
+              subtitle: '5 Brands',
+            ),
           ),
-          _ItemCard(
-            image: 'assets/images/smartphone.jfif',
-            titel: 'Smartphone',
-            subtitle: '8 Brands',
+          GestureDetector(
+            onTap: () => Navigator.of(context).pushNamed('/search_screen'),
+            child: const _ItemCard(
+              image: 'assets/images/smartphone.jfif',
+              titel: 'Smartphone',
+              subtitle: '8 Brands',
+            ),
           ),
-          _ItemCard(
-            image: 'assets/images/fashion.jfif',
-            titel: 'Fashion',
-            subtitle: '23 Brands',
+          GestureDetector(
+            onTap: () => Navigator.of(context).pushNamed('/search_screen'),
+            child: const _ItemCard(
+              image: 'assets/images/fashion.jfif',
+              titel: 'Fashion',
+              subtitle: '23 Brands',
+            ),
           ),
-          _ItemCard(
-            image: 'assets/images/grocery.jfif',
-            titel: 'grocery',
-            subtitle: '7 Brands',
+          GestureDetector(
+            onTap: () => Navigator.of(context).pushNamed('/search_screen'),
+            child: const _ItemCard(
+              image: 'assets/images/grocery.jfif',
+              titel: 'grocery',
+              subtitle: '7 Brands',
+            ),
           ),
         ],
       ),

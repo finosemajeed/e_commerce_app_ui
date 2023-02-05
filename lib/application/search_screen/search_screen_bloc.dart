@@ -20,10 +20,10 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
       ));
     });
 
-    on<SearchProduct>((event, emit) {
+    on<SearchProduct>((event, emit) async {
       final searchQuery = event.productQuerry;
       log(searchQuery, name: 'querry');
-      final products = FetchProduct().allProducts();
+      final products = await FetchProduct().allProducts();
       final items = products
           .where((element) => element.id.toString() == searchQuery)
           .toList();

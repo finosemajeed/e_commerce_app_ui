@@ -1,6 +1,7 @@
 import 'package:e_comerce_app_ui/application/favourite_screen/favourite_screen_bloc.dart';
 import 'package:e_comerce_app_ui/core/color_config.dart';
 import 'package:e_comerce_app_ui/db/product_model.dart';
+import 'package:e_comerce_app_ui/presentation/widgets/widgets_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,11 +32,27 @@ class CustomFavouriteCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 150,
-              width: 150,
-              color: offWhite,
-              child: Image.network(productImage),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) =>
+                        ProductViewScreen(productId: product.id!.toInt())));
+              },
+              child: Container(
+                height: 150,
+                width: 150,
+                color: Colors.white,
+                child: Image.network(
+                  productImage,
+                  loadingBuilder: (ctx, child, loadingImage) {
+                    if (loadingImage == null) {
+                      return child;
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
+              ),
             ),
             Column(
               mainAxisSize: MainAxisSize.min,
@@ -52,7 +69,7 @@ class CustomFavouriteCard extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 25,
                         color: textBlack,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ),

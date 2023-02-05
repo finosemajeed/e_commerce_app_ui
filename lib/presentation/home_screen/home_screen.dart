@@ -63,31 +63,35 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(width: 10),
                   ],
                 ),
-                body: Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
-                  child: CustomScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    slivers: [
-                      SliverList(
-                        delegate: SliverChildListDelegate(
-                          [
-                            GestureDetector(
-                              child: const CustomOfferCard(),
-                              onTap: () {
-                                // context.read<ProductsBloc>().add(FetchProducts());
-                              },
-                            ),
-                            const CustomServiceCardArea(),
-                            const SeeMoreActionButton(text: 'Special for you'),
-                            const SpecialItemCard(),
-                            const SeeMoreActionButton(text: 'Popular Product'),
-                            const ProductCardList(),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                body: CustomScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  slivers: [
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        [
+                          GestureDetector(
+                            child: const CustomOfferCard(),
+                            onTap: () {
+                              // context.read<ProductsBloc>().add(FetchProducts());
+                            },
+                          ),
+                          const CustomServiceCardArea(),
+                          const SeeMoreActionButton(text: 'Special for you'),
+                          const SpecialItemCard(),
+                          const SeeMoreActionButton(text: 'Popular Product'),
+                          const ProductCardList(),
+                          const SeeMoreActionButton(text: 'New Arrivals'),
+                          const ProductCardList(
+                            direction: Axis.vertical,
+                            productCount: 1,
+                          ),
+                          const ProductCardList(),
+                          const SizedBox(height: 70)
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               )
             : const SearchScreen();

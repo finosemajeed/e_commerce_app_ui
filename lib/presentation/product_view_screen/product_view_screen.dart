@@ -29,60 +29,57 @@ class ProductViewScreen extends StatelessWidget {
             .add(FavouriteCheck(item: productId));
       },
     );
-    return SafeArea(
-      child: BlocListener<CartScreenBloc, CartScreenState>(
-        listener: (context, state) {
-          if (state.cartAdded) {
-            Fluttertoast.showToast(msg: 'Product Added to Cart');
+    return BlocListener<CartScreenBloc, CartScreenState>(
+      listener: (context, state) {
+        if (state.cartAdded) {
+          Fluttertoast.showToast(msg: 'Product Added to Cart');
+        }
+      },
+      child: BlocBuilder<ProductsListBloc, ProductsState>(
+        builder: (context, state) {
+          if (state is ProductsLoaded) {
+            final product = state.productList[productId - 1];
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: CustomScrollView(
+                primary: true,
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  ProductImageView(productImage: product.image.toString()),
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        const ProductDetails().productCategory(
+                            product.category ?? 'category', product),
+                        const ProductDetails()
+                            .productName(product.title ?? 'product name'),
+                        const ProductDetails()
+                            .productPrice(product.price.toString()),
+                        const ProductDetails().addQuantityButton(),
+                        const ProductDetails().productDescription(
+                            product.description ?? 'Description'),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              bottomNavigationBar: BlocBuilder<CartScreenBloc, CartScreenState>(
+                builder: (context, state) {
+                  final count = state.itemCount;
+                  final productPrice = product.price!.toInt();
+                  final finalPrice = count * productPrice;
+                  return BottomButton(
+                    productCount: state.itemCount,
+                    productPrice: finalPrice,
+                    product: product,
+                  );
+                },
+              ),
+            );
           }
+          return const Spacer();
         },
-        child: BlocBuilder<ProductsListBloc, ProductsState>(
-          builder: (context, state) {
-            if (state is ProductsLoaded) {
-              final product = state.productList[productId - 1];
-              return Scaffold(
-                backgroundColor: Colors.white,
-                body: CustomScrollView(
-                  primary: true,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  slivers: [
-                    ProductImageView(productImage: product.image.toString()),
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          const ProductDetails().productCategory(
-                              product.category ?? 'category', product),
-                          const ProductDetails()
-                              .productName(product.title ?? 'product name'),
-                          const ProductDetails()
-                              .productPrice(product.price.toString()),
-                          const ProductDetails().addQuantityButton(),
-                          const ProductDetails().productDescription(
-                              product.description ?? 'Description'),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                bottomNavigationBar:
-                    BlocBuilder<CartScreenBloc, CartScreenState>(
-                  builder: (context, state) {
-                    final count = state.itemCount;
-                    final productPrice = product.price!.toInt();
-                    final finalPrice = count * productPrice;
-                    return BottomButton(
-                      productCount: state.itemCount,
-                      productPrice: finalPrice,
-                      product: product,
-                    );
-                  },
-                ),
-              );
-            }
-            return const Spacer();
-          },
-        ),
       ),
     );
   }
