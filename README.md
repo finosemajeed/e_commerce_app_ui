@@ -8,9 +8,13 @@ This project is a starting point for a Flutter application.
 
 ## Screenshots
 
+### Sign-up screen
+
+![SignUp Screen_google-pixel4xl-ohsoorange-portrait](https://user-images.githubusercontent.com/36195634/216838099-b8736a70-e464-41fd-8623-bdcef7eaef90.png)
+
 ### Sign-in screen
 
-![SignIn Screen,SignUp Screen_google-pixel4xl-ohsoorange-portrait](https://user-images.githubusercontent.com/36195634/216838072-b3ca75d6-e5d5-41b4-af9d-df56e84f48cf.png,https://user-images.githubusercontent.com/36195634/216838099-b8736a70-e464-41fd-8623-bdcef7eaef90.png)
+![SignIn Screen](https://user-images.githubusercontent.com/36195634/216838072-b3ca75d6-e5d5-41b4-af9d-df56e84f48cf.png)
 
 ### Home Screen
 
