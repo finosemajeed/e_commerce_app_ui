@@ -51,6 +51,7 @@ class FavouriteScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            
             BlocConsumer<FavouriteScreenBloc, FavouriteScreenState>(
               listener: (context, state) {
                 if (state.favouriteRemoved) {

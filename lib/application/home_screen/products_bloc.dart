@@ -12,7 +12,7 @@ class ProductsListBloc extends Bloc<ProductsEvent, ProductsState> {
     on<ProductsEvent>((event, emit) async {
       if (event is FetchProducts) {
         emit(ProductsLoading());
-        final data = await ProductRepository.fetchProducts();
+        final data = ProductRepository.fetchProducts();
         emit(ProductsLoaded(data));
       } else {
         emit(ProductListError());
